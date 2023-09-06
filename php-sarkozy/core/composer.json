@@ -1,0 +1,13 @@
+{
+    "name": "php-sarkozy/core",
+    "description": "Un framework simple pour le cours TIDAL",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ruben CLERC",
+            "email": "ruben.clerc@cpe.fr"
+        }
+    ],
+    "license": "MIT",
+    "require": {}
+}
