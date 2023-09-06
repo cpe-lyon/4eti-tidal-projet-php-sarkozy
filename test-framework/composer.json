@@ -1,0 +1,24 @@
+{
+    "name": "php-sarkozy/sample-app",
+    "description": "A sample PHP Sarkozy app",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        }
+    ],
+    "require": {
+        "php-sarkozy/core": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../php-sarkozy/core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]    
+}
