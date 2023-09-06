@@ -2,9 +2,8 @@
 
 namespace core;
 
-public abstract class Sarkontroller
+abstract class Sarkontroller
 {
-    __construct
 }
 
 

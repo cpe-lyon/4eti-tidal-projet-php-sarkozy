@@ -1,0 +1,50 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1620d72bf4cb61c929841271b47f3616",
+    "packages": [
+        {
+            "name": "php-sarkozy/core",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../php-sarkozy/core",
+                "reference": "ad42043e80f2adc37027ca93f3474239af5a4747"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "core\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben CLERC",
+                    "email": "ruben.clerc@cpe.fr"
+                }
+            ],
+            "description": "Un framework simple pour le cours TIDAL",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "php-sarkozy/core": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

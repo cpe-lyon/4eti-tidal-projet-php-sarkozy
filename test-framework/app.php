@@ -1,8 +1,15 @@
 <?php
 
-require_once("vendor/php-sarkozy/core/src/run_server.php");
+require 'vendor/autoload.php';
 
-run_server(80);
+use core\SarkozyServer;
+use core\Sarkontroller;
 
+class MonController extends Sarkontroller
+{
+    
+}
+
+SarkozyServer::run_server(8090);
 
 ?>
