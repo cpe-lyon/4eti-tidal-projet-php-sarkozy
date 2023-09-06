@@ -12,7 +12,9 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "core\\": "src/"
+            "core\\": "src/",
+            "utils\\": "src/utils/",
+            "attributes\\": "src/attributes/"
         }
     }    
 }

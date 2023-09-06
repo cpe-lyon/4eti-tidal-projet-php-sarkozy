@@ -2,31 +2,54 @@
 
 namespace core;
 
+use attributes\SarkozyModule;
 
 class SarkozyServer
 {
 
+    private array $controllers;
+
+    /**
+     * @var \ReflectionClass[]
+     */
+    private array $moduleClasses;
+
+    private array $modules = array();
+
+    private int $port;
+
+    function __construct(int $port = 2007)
+    {
+        $this->port = $port;
+    }
 
     /**
      * Runs the server
      *
-     * @param int $port The server port
      * @return void
      **/
-    public static function run_server(int $port = 2007)
+    public function run()
     {
-        var_dump(SarkozyServer::get_controller_classes());
+        $this->controllers = \core\utils\ControllerUtils::get_all_controllers();
+        $this->moduleClasses = \core\utils\ModuleUtils::get_all_modules();
+        $this->init_modules();
     }
 
 
-    private static function get_controller_classes() : array{
-        $children = array();
-        foreach( get_declared_classes() as $class ){
-            if( is_subclass_of( $class, Sarkontroller::class ) )
-                $children[] = $class;
-        }
-        return $children;
+    //TODO: check modules definition
+    private function init_modules()
+    {
+        //HTTP Module
+        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers]);
     }
+
+    private function init_single_module(int $module_flag, array $args){
+        $httpModuleClass = $this->moduleClasses[$module_flag];
+        $httpModuleClass;
+        $this->modules[$module_flag] = $httpModuleClass
+            ->newInstance($args);
+    }
+
 
 }
 

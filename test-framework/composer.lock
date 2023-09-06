@@ -8,16 +8,18 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-main",
+            "version": "dev-core/controller-utils",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
-                "reference": "ad42043e80f2adc37027ca93f3474239af5a4747"
+                "reference": "dad8c10b0fdc9b2f266b00f41cde86a374599117"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "core\\": "src/"
+                    "core\\": "src/",
+                    "utils\\": "src/utils/",
+                    "attributes\\": "src/attributes/"
                 }
             },
             "license": [
