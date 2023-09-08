@@ -3,13 +3,30 @@
 require 'vendor/autoload.php';
 
 use core\SarkozyServer;
-use core\Sarkontroller;
+use attributes\Sarkontroller;
+use attributes\SarkozyModule;
 
-class MonController extends Sarkontroller
-{
-    
+echo "Starting PHP Sarkozy";
+
+#[Sarkontroller]
+class MonController{
 }
 
-SarkozyServer::run_server(8090);
+#[Sarkontroller]
+class MonController2{
+}
+
+#[SarkozyModule(SarkozyModule::HTTP_MODULE)]
+class MonModule{
+
+    function __construct(array $controllers)
+    {
+        var_dump($controllers);
+    }
+
+}
+
+$server = new SarkozyServer();
+$server->run();
 
 ?>
