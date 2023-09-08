@@ -1,4 +1,5 @@
 /php-sarkozy/core/vendor/
 /test-framework/vendor/
+/php-sarkozy/http/vendor/
 /.vscode
 /index.html
