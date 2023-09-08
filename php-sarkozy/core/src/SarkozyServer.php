@@ -18,9 +18,15 @@ class SarkozyServer
 
     private int $port;
 
-    function __construct(int $port = 2007)
+    private string $viewsPath;
+
+    function __construct(int $port = 2007, string $viewsPath = null)
     {
         $this->port = $port;
+        $this-> viewsPath = $viewsPath;
+        if($viewsPath === null){
+            $this->viewsPath = getcwd()+"/views";
+        }
     }
 
     /**
@@ -41,6 +47,7 @@ class SarkozyServer
     {
         //HTTP Module
         $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers]);
+        $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
     }
 
     private function init_single_module(int $module_flag, array $args){
