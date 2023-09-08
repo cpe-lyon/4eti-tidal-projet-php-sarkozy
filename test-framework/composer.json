@@ -10,12 +10,20 @@
         }
     ],
     "require": {
-        "php-sarkozy/core": "@dev"
+        "php-sarkozy/core": "@dev",
+        "php-sarkozy/le-temps-des-templates": "@dev"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../php-sarkozy/core",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../php-sarkozy/le-temps-des-templates",
             "options": {
                 "symlink": true
             }
