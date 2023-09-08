@@ -25,7 +25,6 @@ class MonModule{
     }
 
 }
-
 $server = new SarkozyServer();
 $server->run();
 
