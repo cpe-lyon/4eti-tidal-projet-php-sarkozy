@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1620d72bf4cb61c929841271b47f3616",
+    "content-hash": "96f3108c6b7740cfa8c3573335add6b4",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-core/controller-utils",
+            "version": "dev-template",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
@@ -36,13 +36,43 @@
                 "symlink": true,
                 "relative": true
             }
+        },
+        {
+            "name": "php-sarkozy/le-temps-des-templates",
+            "version": "dev-template",
+            "dist": {
+                "type": "path",
+                "url": "../php-sarkozy/le-temps-des-templates",
+                "reference": "c9bd8f34b93d3be88c42d7f1fcb19dfaa0e7ef3b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josse DE OLIVEIRA",
+                    "email": "josse.de-oliveira@cpe.fr"
+                }
+            ],
+            "description": "Moteur de templating du framework PHP Sarkozy",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-sarkozy/core": 20
+        "php-sarkozy/core": 20,
+        "php-sarkozy/le-temps-des-templates": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

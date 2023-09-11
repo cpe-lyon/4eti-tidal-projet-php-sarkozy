@@ -14,8 +14,8 @@ class Template{
     }
     
     public function render() {
-        if (file_exists($file)) {
-            $content = file_get_contents($file);
+        if (file_exists($this->file)) {
+            $content = file_get_contents($this->file);
             
             foreach ($this->variables as $variable => $value) {
                 $content = str_replace("{{ $variable }}", $value, $content);
@@ -23,7 +23,7 @@ class Template{
             
             return $content;
         } else {
-            throw new Exception("Le fichier de modèle '$file' n'existe pas.");
+            throw new Exception("Le fichier de modèle '$this->file' n'existe pas.");
         }
     }
 

@@ -5,8 +5,11 @@ require 'vendor/autoload.php';
 use core\SarkozyServer;
 use attributes\Sarkontroller;
 use attributes\SarkozyModule;
+use PhpSarkozy\LeTempsDesTemplates\LeTempsDesTemplatesModule;
 
-echo "Starting PHP Sarkozy";
+echo "Enabling ".LeTempsDesTemplatesModule::MODULE_NAME."\n";
+
+echo "Starting PHP Sarkozy\n";
 
 #[Sarkontroller]
 class MonController{
