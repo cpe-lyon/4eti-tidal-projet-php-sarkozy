@@ -12,9 +12,10 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "core\\": "src/",
-            "utils\\": "src/utils/",
-            "attributes\\": "src/attributes/"
+            "PhpSarkozy\\core\\": "src/",
+            "PhpSarkozy\\core\\utils\\": "src/utils/",
+            "PhpSarkozy\\core\\attributes\\": "src/attributes/",
+            "PhpSarkozy\\core\\api\\": "src/api"
         }
     }    
 }

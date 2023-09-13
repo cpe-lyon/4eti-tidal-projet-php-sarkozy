@@ -1,8 +1,8 @@
 <?php
 
-namespace core\utils;
+namespace PhpSarkozy\core\utils;
 
-use attributes\Sarkontroller;
+use PhpSarkozy\core\attributes\Sarkontroller;
 
 /**
  * Utils for Sarkontroller gestion

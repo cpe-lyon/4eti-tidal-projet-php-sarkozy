@@ -1,8 +1,8 @@
 <?php
 
-namespace core;
+namespace PhpSarkozy\core;
 
-use attributes\SarkozyModule;
+use PhpSarkozy\core\attributes\SarkozyModule;
 
 class SarkozyServer
 {
@@ -36,9 +36,10 @@ class SarkozyServer
      **/
     public function run()
     {
-        $this->controllers = \core\utils\ControllerUtils::get_all_controllers();
-        $this->moduleClasses = \core\utils\ModuleUtils::get_all_modules();
+        $this->controllers = utils\ControllerUtils::get_all_controllers();
+        $this->moduleClasses = utils\ModuleUtils::get_all_modules();
         $this->init_modules();
+        $this->listen();
     }
 
 
@@ -48,7 +49,7 @@ class SarkozyServer
         $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
 
         //HTTP Module should be last
-        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers]);
+        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
     }
 
     private function init_single_module(int $module_flag, array $args){
@@ -58,7 +59,25 @@ class SarkozyServer
             ->newInstance(...$args);
     }
 
+    private function listen(){
+        $host = 'localhost';
+        $port = $this->port;
+        $http_module = $this->modules[SarkozyModule::HTTP_MODULE];
 
+        $server = stream_socket_server("tcp://$host:$port", $errno, $errstr);
+        if (!$server) {
+            die("Runtime error : server failed to start $errstr ($errno)\n");
+        }
+        
+        while ($client = stream_socket_accept($server)) {
+            $request = $http_module->get_request($client);
+            var_dump($request);
+            //$http_module->handle_request($request);
+
+        }
+        
+        fclose($server);
+    }
 }
 
 

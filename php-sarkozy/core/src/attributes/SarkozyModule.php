@@ -1,6 +1,6 @@
 <?php
 
-namespace attributes;
+namespace PhpSarkozy\core\attributes;
 
 use Attribute;
 

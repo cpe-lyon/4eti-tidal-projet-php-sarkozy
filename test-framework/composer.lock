@@ -4,22 +4,23 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96f3108c6b7740cfa8c3573335add6b4",
+    "content-hash": "1620d72bf4cb61c929841271b47f3616",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-template",
+            "version": "dev-core/controller-utils",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
-                "reference": "dad8c10b0fdc9b2f266b00f41cde86a374599117"
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "core\\": "src/",
-                    "utils\\": "src/utils/",
-                    "attributes\\": "src/attributes/"
+                    "PhpSarkozy\\core\\": "src/",
+                    "PhpSarkozy\\core\\utils\\": "src/utils/",
+                    "PhpSarkozy\\core\\attributes\\": "src/attributes/",
+                    "PhpSarkozy\\core\\api\\": "src/api"
                 }
             },
             "license": [
@@ -32,6 +33,38 @@
                 }
             ],
             "description": "Un framework simple pour le cours TIDAL",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "php-sarkozy/http",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../php-sarkozy/http",
+                "reference": "8db874f1172447cc5b455544eef1a043c11764d1"
+            },
+            "require": {
+                "php-sarkozy/core": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\Http\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Theo CLERE",
+                    "email": "theo.clere@cpe.fr"
+                }
+            ],
+            "description": "Le module http pour php-sarkozy",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -72,7 +105,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "php-sarkozy/core": 20,
-        "php-sarkozy/le-temps-des-templates": 20
+        "php-sarkozy/le-temps-des-templates": 20,
+        "php-sarkozy/http": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

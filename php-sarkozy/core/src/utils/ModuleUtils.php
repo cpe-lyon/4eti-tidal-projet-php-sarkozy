@@ -1,8 +1,8 @@
 <?php
 
-namespace core\utils;
+namespace PhpSarkozy\core\utils;
 
-use attributes\SarkozyModule;
+use PhpSarkozy\core\attributes\SarkozyModule;
 
 /**
  * Utils for modules gestion
