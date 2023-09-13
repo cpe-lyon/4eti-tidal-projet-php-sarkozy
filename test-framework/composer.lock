@@ -12,15 +12,15 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
-                "reference": "ae608253163052f1aee898e62534de314a707cf2"
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "core\\": "src/",
-                    "utils\\": "src/utils/",
-                    "attributes\\": "src/attributes/",
-                    "api\\": "src/api"
+                    "PhpSarkozy\\core\\": "src/",
+                    "PhpSarkozy\\core\\utils\\": "src/utils/",
+                    "PhpSarkozy\\core\\attributes\\": "src/attributes/",
+                    "PhpSarkozy\\core\\api\\": "src/api"
                 }
             },
             "license": [
@@ -82,5 +82,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
