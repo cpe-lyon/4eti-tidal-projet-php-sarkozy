@@ -1,0 +1,29 @@
+{
+    "name": "php-sarkozy/http",
+    "description": "Le module http pour php-sarkozy",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpSarkozy\\Http\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        }
+    ],
+    "require": {
+        "php-sarkozy/core": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ] 
+}

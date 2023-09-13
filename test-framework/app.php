@@ -1,12 +1,14 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 use core\SarkozyServer;
 use attributes\Sarkontroller;
-use attributes\SarkozyModule;
 
-echo "Starting PHP Sarkozy";
+use PhpSarkozy\Http\HttpModule;
+echo "Enabled ". HttpModule::NAME . "\n";
+
+echo "Starting PHP Sarkozy...\n";
 
 #[Sarkontroller]
 class MonController{
@@ -14,16 +16,6 @@ class MonController{
 
 #[Sarkontroller]
 class MonController2{
-}
-
-#[SarkozyModule(SarkozyModule::HTTP_MODULE)]
-class MonModule{
-
-    function __construct(array $controllers)
-    {
-        var_dump($controllers);
-    }
-
 }
 
 $server = new SarkozyServer();

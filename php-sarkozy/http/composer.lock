@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86439ca23d7c398483c0c5fa276d2fe9",
+    "content-hash": "1e5c5567e869dd94039a923c53479602",
     "packages": [
         {
             "name": "php-sarkozy/core",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../php-sarkozy/core",
+                "url": "../core",
                 "reference": "ae608253163052f1aee898e62534de314a707cf2"
             },
             "type": "library",
@@ -37,46 +37,13 @@
                 "symlink": true,
                 "relative": true
             }
-        },
-        {
-            "name": "php-sarkozy/http",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../php-sarkozy/http",
-                "reference": "8db874f1172447cc5b455544eef1a043c11764d1"
-            },
-            "require": {
-                "php-sarkozy/core": "@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpSarkozy\\Http\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Theo CLERE",
-                    "email": "theo.clere@cpe.fr"
-                }
-            ],
-            "description": "Le module http pour php-sarkozy",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-sarkozy/core": 20,
-        "php-sarkozy/http": 20
+        "php-sarkozy/core": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -14,7 +14,8 @@
         "psr-4": {
             "core\\": "src/",
             "utils\\": "src/utils/",
-            "attributes\\": "src/attributes/"
+            "attributes\\": "src/attributes/",
+            "api\\": "src/api"
         }
     }    
 }

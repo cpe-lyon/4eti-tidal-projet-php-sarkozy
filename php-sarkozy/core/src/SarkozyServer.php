@@ -33,6 +33,7 @@ class SarkozyServer
         $this->controllers = \core\utils\ControllerUtils::get_all_controllers();
         $this->moduleClasses = \core\utils\ModuleUtils::get_all_modules();
         $this->init_modules();
+        $this->listen();
     }
 
 
@@ -50,7 +51,25 @@ class SarkozyServer
             ->newInstance($args);
     }
 
+    private function listen(){
+        $host = 'localhost';
+        $port = $this->port;
+        $http_module = $this->modules[SarkozyModule::HTTP_MODULE];
 
+        $server = stream_socket_server("tcp://$host:$port", $errno, $errstr);
+        if (!$server) {
+            die("Runtime error : server failed to start $errstr ($errno)\n");
+        }
+        
+        while ($client = stream_socket_accept($server)) {
+            $request = $http_module->get_request($client);
+            var_dump($request);
+            //$http_module->handle_request($request);
+
+        }
+        
+        fclose($server);
+    }
 }
 
 
