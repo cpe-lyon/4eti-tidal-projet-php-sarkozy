@@ -2,8 +2,8 @@
 
 namespace PhpSarkozy\LeTempsDesTemplates;
 
-use attributes\SarkozyModule;
-use api\Response;
+use PhpSarkozy\core\attributes\SarkozyModule;
+use PhpSarkozy\core\api\Response;
 
 #[SarkozyModule(SarkozyModule::TEMPLATE_MODULE)]
 class LeTempsDesTemplatesModule
@@ -13,7 +13,7 @@ class LeTempsDesTemplatesModule
 
     function __construct(string $path)
     {
-        var_dump($path);
+        //TODO @ruben.clerc: loading
     }
 
 

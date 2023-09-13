@@ -13,8 +13,14 @@ echo "Enabling ".LeTempsDesTemplatesModule::MODULE_NAME."\n";
 
 echo "Starting PHP Sarkozy...\n";
 
+
+use PhpSarkozy\LeTempsDesTemplates\LtdtView;
+
 #[Sarkontroller]
 class MonController{
+    function index(){
+        return new LtdtView("/temps.html");
+    }
 }
 
 #[Sarkontroller]
