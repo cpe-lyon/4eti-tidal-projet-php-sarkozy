@@ -1,13 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 use core\SarkozyServer;
 use attributes\Sarkontroller;
 use attributes\SarkozyModule;
 use PhpSarkozy\LeTempsDesTemplates\LeTempsDesTemplatesModule;
+use PhpSarkozy\LeTempsDesTemplates\Template;
 
 echo "Enabling ".LeTempsDesTemplatesModule::MODULE_NAME."\n";
 
@@ -32,8 +30,5 @@ class MonModule{
 }
 $server = new SarkozyServer();
 $server->run();
-
-$template = new Template("temps");
-var_dump($template);
 
 ?>
