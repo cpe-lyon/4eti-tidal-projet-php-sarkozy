@@ -63,9 +63,12 @@ class SarkozyServer
         
         while ($client = stream_socket_accept($server)) {
             $request = $http_module->get_request($client);
-            var_dump($request);
-            //$http_module->handle_request($request);
 
+            $http_module->handle_response($request);
+
+            $raw_response = $http_module->get_raw_response($request);
+            fwrite($client, $raw_response);
+            fclose($client);
         }
         
         fclose($server);
