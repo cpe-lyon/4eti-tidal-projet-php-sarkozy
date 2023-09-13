@@ -1,6 +1,6 @@
 <?php
 
-namespace api;
+namespace PhpSarkozy\core\api;
 
 class SarkontrollerRequest
 {

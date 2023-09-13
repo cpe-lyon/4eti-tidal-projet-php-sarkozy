@@ -1,5 +1,5 @@
 <?php
-namespace api;
+namespace PhpSarkozy\core\api;
 
 /*
  * Response Class

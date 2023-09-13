@@ -3,16 +3,25 @@ namespace PhpSarkozy\Http;
 
 
 
-use attributes\SarkozyModule;
-use api\Request;
+use PhpSarkozy\core\attributes\SarkozyModule;
+use PhpSarkozy\core\api\Request;
+use PhpSarkozy\core\api\Response;
+use PhpSarkozy\core\api\SarkontrollerRequest;
+use PhpSarkozy\core\api\SarkoView as SarkoView;
 
 #[SarkozyModule(SarkozyModule::HTTP_MODULE)]
 final class HttpModule{
 
     final const NAME = "HTTP-MODULE";
 
-    public function __construct(array $controllers){
+    private $templateModule;
+
+    public function __construct(array $controllers, array $modules){
+        //TODO: true ref when templating server commited
+        $this->templateModule = array_key_exists("SarkozyModule::TEMPLATE_MODULE", $modules) ?
+            $modules["SarkozyModule::TEMPLATE_MODULE"] : null;
         //TO-DO
+
     }
 
     function get_request($client) : Request {
@@ -36,6 +45,15 @@ final class HttpModule{
         }
 
         return new Request($method, $path, $headers, $body);
+    }
+
+    function append_response(Request $srcRequest, $controllerResponse): Request{
+        //TODO: real response detection
+        $isTemplate = $this->templateModule !== null && $controllerResponse instanceof SarkoView;
+        if ($isTemplate){
+            return $this->templateModule->getTemplateResponse($controllerResponse->get_view_reference(), $controllerResponse->get_view_args());
+        }
+        //TODO: response if not template
     }
 }
 

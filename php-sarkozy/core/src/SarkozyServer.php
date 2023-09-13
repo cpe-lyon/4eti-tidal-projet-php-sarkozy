@@ -1,8 +1,8 @@
 <?php
 
-namespace core;
+namespace PhpSarkozy\core;
 
-use attributes\SarkozyModule;
+use PhpSarkozy\core\attributes\SarkozyModule;
 
 class SarkozyServer
 {
@@ -30,8 +30,8 @@ class SarkozyServer
      **/
     public function run()
     {
-        $this->controllers = \core\utils\ControllerUtils::get_all_controllers();
-        $this->moduleClasses = \core\utils\ModuleUtils::get_all_modules();
+        $this->controllers = utils\ControllerUtils::get_all_controllers();
+        $this->moduleClasses = utils\ModuleUtils::get_all_modules();
         $this->init_modules();
         $this->listen();
     }
@@ -41,14 +41,14 @@ class SarkozyServer
     private function init_modules()
     {
         //HTTP Module
-        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers]);
+        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
     }
 
     private function init_single_module(int $module_flag, array $args){
         $httpModuleClass = $this->moduleClasses[$module_flag];
         $httpModuleClass;
         $this->modules[$module_flag] = $httpModuleClass
-            ->newInstance($args);
+            ->newInstance(...$args);
     }
 
     private function listen(){

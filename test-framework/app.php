@@ -2,8 +2,8 @@
 
 require_once 'vendor/autoload.php';
 
-use core\SarkozyServer;
-use attributes\Sarkontroller;
+use PhpSarkozy\core\SarkozyServer;
+use PhpSarkozy\core\attributes\Sarkontroller;
 
 use PhpSarkozy\Http\HttpModule;
 echo "Enabled ". HttpModule::NAME . "\n";
