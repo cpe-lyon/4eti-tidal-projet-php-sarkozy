@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
-                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
+                "reference": "370dcaaf00d58cd7c7257ebb65ef359a4a08373a"
             },
             "type": "library",
             "autoload": {
@@ -44,7 +44,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/http",
-                "reference": "8db874f1172447cc5b455544eef1a043c11764d1"
+                "reference": "36e0adcaf4f55778f6668607334448f61251e393"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -112,5 +112,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
