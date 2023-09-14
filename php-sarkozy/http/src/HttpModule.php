@@ -10,7 +10,7 @@ use PhpSarkozy\core\api\SarkoView as SarkoView;
 use PhpSarkozy\core\api\SarkoJson as SarkoJson;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 
-#[SarkozyModule(SarkozyModule::HTTP_MODULE)]
+#[SarkozyModule(SarkozyModule::PROTOCOL_MODULE)]
 final class HttpModule{
 
     final const NAME = "HTTP-MODULE";
@@ -27,6 +27,10 @@ final class HttpModule{
 
         $this->parser = new HttpParser();
 
+    }
+
+    function get_protocol(): string{
+        return "http";
     }
 
     function get_request($client) : Request {
