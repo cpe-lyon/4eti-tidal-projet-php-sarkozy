@@ -1,6 +1,8 @@
 <?php
 require_once 'vendor/autoload.php';
 
+use PhpSarkozy\core\api\SarkoView;
+use PhpSarkozy\core\api\SarkoJson;
 use PhpSarkozy\core\SarkozyServer;
 use PhpSarkozy\core\attributes\Sarkontroller;
 

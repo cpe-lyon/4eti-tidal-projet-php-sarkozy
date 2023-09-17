@@ -1,11 +1,14 @@
 <?php
 namespace PhpSarkozy\Http;
 
+use PhpSarkozy\core\api\SarkoError;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\core\api\Request;
 use PhpSarkozy\core\api\Response;
+use PhpSarkozy\core\api\SarkoError as ApiSarkoError;
 use PhpSarkozy\core\api\SarkoView as SarkoView;
 use PhpSarkozy\core\api\SarkoJson as SarkoJson;
+use PhpSarkozy\core\api\SarkontrollerRequest;
 
 #[SarkozyModule(SarkozyModule::HTTP_MODULE)]
 final class HttpModule{
@@ -14,40 +17,46 @@ final class HttpModule{
 
     private $template_module;
 
+    private HttpParser $parser;
+
     public function __construct(array $controllers, array $modules){
         $this->template_module = array_key_exists(SarkozyModule::TEMPLATE_MODULE, $modules) ?
             $modules[SarkozyModule::TEMPLATE_MODULE] : null;
         //TO-DO
 
+        $this->parser = new HttpParser();
+
     }
 
     function get_request($client) : Request {
-        $request_line = fgets($client);
+        return $this->parser->get_request($client);
+    }
 
-        // Http method and path extraction
-        list($method, $path, $protocol) = explode(' ', trim($request_line));
+    function get_raw_response(Request $request): string{
+        return $this->parser->get_raw_response($request);
+    }
 
-        // Read Headers
-        $headers = [];
-        while ($header = trim(fgets($client))) {
-            list($name, $value) = explode(':', $header, 2);
-            $headers[$name] = $value;
-        }
-    
-        // Read Body
-        $body = '';
-        if (isset($headers['Content-Length'])) {
-            $content_length = (int)$headers['Content-Length'];
-            $body = fread($client, $content_length);
-        }
+    public function get_call(Request $request):SarkontrollerRequest
+    {
+        $path = $request->get_uri();
+        return HttpDefaultRouter::get_call($path);
+    }
 
-        return new Request($client, $method, $path, $headers, $body);
+    private function handle_error(Request $request, $controller_response): Request{
+        //TODO @theo.clere: error management
+        $res = new Response("Error 404");
+        $res->set_code(404);
+        $request->set_response($res);
+        return $request;
     }
 
     function handle_response(Request $request): Request{
         //TODO @theo.clere: real response detection
         $controller_response = new SarkoJsonTest();
 
+        if($controller_response instanceof ApiSarkoError){
+            return $this->handle_error($request, $controller_response);
+        }
 
         $is_template = $this->template_module !== null && $controller_response instanceof SarkoView;
         if ($is_template){
@@ -78,36 +87,6 @@ final class HttpModule{
         return $response;
     }
 
-    function get_raw_response(Request $request): String{
-        $res = "";
-        $response = $request->get_response();
-        
-        foreach($response->get_headers() as $key => $value){
-            $res .= $key.": ".$value."\r\n";
-        }
-        $res .= "\r\n";
-
-        $res .= $response->get_body();
-
-        return $res;
-    }
-
-}
-
-class SarkoJsonTest implements SarkoJson{
-    function get_value(): array{
-        $array = array (
-            "toto",
-            24,
-            "fruits"  => array("a" => "orange", "b" => "banana", "c" => "apple"),
-            "numbers" => array(1, 2, 3, 4, 5, 6),
-            "holes"   => array("first", 5 => "second", "third")
-        );
-
-
-
-        return $array;
-    }
 }
 
 

@@ -29,9 +29,9 @@ Il a pour responsabilités de:
 * Convertir les objets Response en réponses HTTP en dur
 * Utiliser d'autres module pour ces tâches
 ### RouterModule
-**TODO**
+**TODO @josse.de-oliveira**
 ### Le Temps des Templates
 Ce module a pour responsabilité de créer une réponse HTML depuis une vue en utilisant des fichiers de templates
 
 ## Répartition du travail
-**TODO**
+**TODO @josse.de-oliveira**
