@@ -1,0 +1,86 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "be5cd055ac70363fb0cb99ee39761af9",
+    "packages": [
+        {
+            "name": "php-sarkozy/core",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../core",
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\core\\": "src/",
+                    "PhpSarkozy\\core\\utils\\": "src/utils/",
+                    "PhpSarkozy\\core\\attributes\\": "src/attributes/",
+                    "PhpSarkozy\\core\\api\\": "src/api"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben CLERC",
+                    "email": "ruben.clerc@cpe.fr"
+                }
+            ],
+            "description": "Un framework simple pour le cours TIDAL",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "php-sarkozy/http",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../http",
+                "reference": "8db874f1172447cc5b455544eef1a043c11764d1"
+            },
+            "require": {
+                "php-sarkozy/core": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\Http\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Theo CLERE",
+                    "email": "theo.clere@cpe.fr"
+                }
+            ],
+            "description": "Le module http pour php-sarkozy",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "php-sarkozy/core": 20,
+        "php-sarkozy/http": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

@@ -1,0 +1,30 @@
+{
+    "name": "php-sarkozy/skeleton",
+    "description": "A skeleton app for PHP Sarkozy",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php-sarkozy/core": "@dev",
+        "php-sarkozy/http": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../core",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../http",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "scripts": {
+        "run-server": "php ./src/config/runner/start-server.php",
+        "ump": "php ./scripts/ump.php"
+    }    
+}
