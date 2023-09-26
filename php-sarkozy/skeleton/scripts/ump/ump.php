@@ -1,5 +1,7 @@
 <?php
 
+require_once "ControllerMaker.php";
+
 class ShellTool{
 
     private $shellcolored;
@@ -31,7 +33,9 @@ class ShellTool{
     }
 
     public function ask():string{
-        return readline(" > ");
+        $inp = readline(" > ");
+        readline_add_history($inp);
+        return $inp;
     }
 
     private function clean_arg($arg){
@@ -42,43 +46,39 @@ class ShellTool{
     }
 
     private function make_controller($args){
-        if(count($args) != 2){
-            $this->disperror("Usage: $args[0] <controller-name>");
-            return;
+        try {
+            ControllerMaker::make_controller($args);
+        } catch( Exception $e){
+            $this->disperror($e->getMessage());
         }
-        $name = $args[1];
-        if ($name == ''){
-            $this->disperror("Controller name should not be empty");
-            return;
-        }
-        if (preg_match('/[^A-Za-z]/', $name)){
-            $this->disperror("Controller name should only contain ASCII letters");
-            return;
-        }
-        $name = strtoupper($name[0]).substr($name, 1);
-        $file = __DIR__."/../src/controllers/$name.php";
-        if(file_exists($file)){
-            $this->disperror("Can't create controller: $name.php already exists");
-            return;
-        }
-        
-        $content = "<?php\r\n\r\n".
-            "use PhpSarkozy\core\attributes\Sarkontroller;\r\n\r\n".
-            "#[Sarkontroller]\r\n".
-            "class $name{\r\n}\r\n\r\n".
-            "?>\r\n";
-        if( ($fd = fopen($file, 'w')) == false){
-            $this->disperror("Can't create controller: Could not create $name.php");
-            return;
-        }
-        if (fwrite($fd, $content) === false) {
-            $this->disperror("Can't create controller: Could not write in $name.php");
-            return;
-        }
-        fclose($fd);
 
-        echo "$name created !\n";
+    }
 
+
+    private function help_cmd($cmd, $desc){
+        if($this->shellcolored){
+            echo ShellTool::CWHT.ShellTool::CBLU.$cmd.ShellTool::CNOR." $desc\r\n";
+        }else{
+            echo "$cmd $desc\r\n";
+        }
+    }
+
+    private function help_opt($cmd, $desc){
+        if($this->shellcolored){
+            echo '  '.ShellTool::CWHT.ShellTool::CBLU.'*'.ShellTool::CNOR." $cmd $desc\r\n";
+        }else{
+            echo "  * $cmd $desc\r\n";
+        }
+    }
+
+    private function help(){
+        echo "\r\n";
+        $this->help_cmd("mk-controller", "Make a controller");
+        $this->help_opt("<controller-name>", "ASCII letters only, name of the class");
+        $this->help_opt("-m <method-name>", "snake_case method name (optional, can be used several times in a single command)");
+        echo "\r\n";
+        $this->help_cmd("exit", "Exit UMP");
+        echo "\r\n";
     }
 
     public function exec(array $rawArgs){
@@ -93,10 +93,13 @@ class ShellTool{
             case 'mk-controller':
                 $this->make_controller($args);
                 break;
+            case 'help':
+                $this->help();
+                break;
             case 'exit':
                 return 1;
             default:
-                $this->disperror("Unknown command");
+                $this->disperror('Unknown command, type "help" to display available commands');
                 break;
         }
         return 0;

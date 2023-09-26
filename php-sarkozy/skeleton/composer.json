@@ -24,7 +24,13 @@
         }
     ],
     "scripts": {
-        "run-server": "php ./src/config/runner/start-server.php",
-        "ump": "php ./scripts/ump.php"
+        "run-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "php ./src/config/runner/start-server.php"
+        ],
+        "ump": [
+            "Composer\\Config::disableProcessTimeout",
+            "php ./scripts/ump/ump.php"
+        ]
     }    
 }
