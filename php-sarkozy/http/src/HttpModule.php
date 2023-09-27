@@ -50,9 +50,8 @@ final class HttpModule{
         return $request;
     }
 
-    function handle_response(Request $request): Request{
+    function handle_response(Request $request, $controller_response): Request{
         //TODO @theo.clere: real response detection
-        $controller_response = new SarkoJsonTest();
 
         if($controller_response instanceof ApiSarkoError){
             return $this->handle_error($request, $controller_response);
