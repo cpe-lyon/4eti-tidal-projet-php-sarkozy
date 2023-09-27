@@ -23,6 +23,7 @@ class Template{
         if (file_exists($this->file)) {
             $content = file_get_contents($this->file);
             
+            //TODO: use preg_match (regex) instead of str_replace
             foreach ($this->variables as $variable => $value) {
                 $content = str_replace("{{ $variable }}", $value, $content);
             }
