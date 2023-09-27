@@ -97,6 +97,7 @@ class SarkozyServer
         }
         
         while ($client = stream_socket_accept($server, -1)) {
+            echo "HELLO WORLD";
             /**
              * @var api\Request $request
              */
