@@ -20,9 +20,8 @@ final class HttpModule{
     private HttpParser $parser;
 
     public function __construct(array $controllers, array $modules){
-        //TODO: true ref when templating server commited
-        $this->template_module = array_key_exists("SarkozyModule::TEMPLATE_MODULE", $modules) ?
-            $modules["SarkozyModule::TEMPLATE_MODULE"] : null;
+        $this->template_module = array_key_exists(SarkozyModule::TEMPLATE_MODULE, $modules) ?
+            $modules[SarkozyModule::TEMPLATE_MODULE] : null;
         //TO-DO
 
         $this->parser = new HttpParser();
@@ -56,7 +55,7 @@ final class HttpModule{
     }
 
     function handle_response(Request $request, $controller_response): Request{
-        //TODO @theo.clere: response detection
+        //TODO @theo.clere: real response detection
 
         if($controller_response instanceof ApiSarkoError){
             return $this->handle_error($request, $controller_response);
@@ -68,7 +67,8 @@ final class HttpModule{
              * @var SarkoView $sarko_view
              */
             $sarko_view = $controller_response;
-            $request->set_response($this->template_module->get_template_response($sarko_view->get_view_reference()), $sarko_view->get_view_args());
+            $request->set_response($this->template_module->get_template_response($sarko_view->get_view_reference(), $sarko_view->get_view_args()));
+            return $request;
         } else if ($controller_response instanceof SarkoJson){
     
             /**
