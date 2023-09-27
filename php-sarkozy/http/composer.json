@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PhpSarkozy\\Http\\": "src/"
+            "PhpSarkozy\\Http\\": "src/",
+            "PhpSarkozy\\Http\\api": "src/api/"
         }
     },
     "authors": [

@@ -7,35 +7,19 @@ namespace PhpSarkozy\core\api;
 
 class Request {
     private $client;
-    private string $method;
-    private string $uri;
-    private array $headers;
-    private string $body;
+
+    private array $metadata;
+
+    
     private Response $response;
 
-    public function __construct($client, string $method, string $uri, array $headers, string $body) {
+    public function __construct($client, array $metadata) {
         $this->client = $client;
-        $this->method = $method;
-        $this->uri = $uri;
-        $this->headers = $headers;
-        $this->body = $body;
+        $this->metadata = $metadata;
     }
 
-
-    function get_method() : string {
-        return $this->method;
-    }
-
-    function get_uri() : string {
-        return $this->uri;
-    }
-
-    function get_headers() : array {
-        return $this->headers;
-    }
-
-    function get_body() : string {
-        return $this->body;
+    function get_metadata(){
+        return $this->metadata;
     }
 
     function get_client(){
