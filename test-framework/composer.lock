@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1620d72bf4cb61c929841271b47f3616",
+    "content-hash": "2688ed7e12e7ff06b089f4aedcd82642",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-core/controller-utils",
+            "version": "dev-feat---manage-errors-&-attributes",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
@@ -40,11 +40,11 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-main",
+            "version": "dev-feat---manage-errors-&-attributes",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/http",
-                "reference": "36e0adcaf4f55778f6668607334448f61251e393"
+                "reference": "29fdbd4cef5e6e9b772f4dfbf0ec9dd80470cf49"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -52,7 +52,10 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PhpSarkozy\\Http\\": "src/"
+                    "PhpSarkozy\\Http\\": "src/",
+                    "PhpSarkozy\\Http\\api\\": "src/api/",
+                    "PhpSarkozy\\Http\\attributes\\": "src/attributes",
+                    "PhpSarkozy\\Http\\utils\\": "src/utils"
                 }
             },
             "license": [
@@ -72,11 +75,11 @@
         },
         {
             "name": "php-sarkozy/le-temps-des-templates",
-            "version": "dev-template",
+            "version": "dev-feat---manage-errors-&-attributes",
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/le-temps-des-templates",
-                "reference": "c9bd8f34b93d3be88c42d7f1fcb19dfaa0e7ef3b"
+                "reference": "9c2f2015861155cb3ca165f0ff55f901251f2cae"
             },
             "type": "library",
             "autoload": {
