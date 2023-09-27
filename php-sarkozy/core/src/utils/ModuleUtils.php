@@ -37,7 +37,7 @@ final class ModuleUtils
         $newMethod = "    public function $funcName($rawArgList) {}";
         $filename = $moduleClass->getFileName();
         $sourceCode = file_get_contents($filename);
-        $sourceCode = preg_replace("/(class\s+${className}(?:[^{]+|\s+)*\{)/", "$0\n".$newMethod, $sourceCode);
+        $sourceCode = preg_replace("/(class\s+{$className}(?:[^{]+|\s+)*\{)/", "$0\n".$newMethod, $sourceCode);
         file_put_contents($filename, $sourceCode);
         echo " -> Added it !\n";
         return false;
