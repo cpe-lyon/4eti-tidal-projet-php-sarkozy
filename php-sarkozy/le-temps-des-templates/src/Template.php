@@ -1,5 +1,7 @@
 <?php
 
+namespace PhpSarkozy\LeTempsDesTemplates;
+
 class Template{
 
     private $variables = array();
@@ -12,6 +14,10 @@ class Template{
     public function assign($variable, $value) {
         $this->variables[$variable] = $value;
     }
+
+    public function array_assign($args){
+        $this->variables = $args;
+    }
     
     public function render() {
         if (file_exists($this->file)) {
@@ -23,7 +29,7 @@ class Template{
             
             return $content;
         } else {
-            throw new Exception("Le fichier de modèle '$this->file' n'existe pas.");
+            throw new \Exception("Le fichier de modèle '$this->file' n'existe pas.");
         }
     }
 

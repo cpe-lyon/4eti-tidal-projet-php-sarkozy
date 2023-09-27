@@ -21,12 +21,15 @@ use PhpSarkozy\LeTempsDesTemplates\LtdtView;
 class FakeView implements SarkoView{
     function get_view_reference(): string
     {
-        return "ok";
+        return "temps.ltdt";
     }
 
     function get_view_args(): array
     {
-        return array();
+        return array(
+            "titre" => "SarkoTest",
+            "contenu" => "Bonjour, je suis le SarkoTest et j'aime quand ça marche"
+        );
     }
 }
 
