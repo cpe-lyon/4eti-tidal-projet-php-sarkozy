@@ -2,8 +2,10 @@
 
 namespace PhpSarkozy\core;
 
+use LogUtils;
 use PhpSarkozy\core\api\SarkoError;
 use PhpSarkozy\core\attributes\SarkozyModule;
+use PhpSarkozy\core\utils\ModuleUtils;
 
 class SarkozyServer
 {
@@ -21,7 +23,10 @@ class SarkozyServer
     private array $modules = array();
 
     private int $port;
+  
+    private $host = 'localhost';
 
+    private $protocol = 'tcp';
     private ?string $viewsPath;
 
     function __construct(int $port = 2007, string $viewsPath = null)
@@ -43,7 +48,18 @@ class SarkozyServer
         $this->controllers = utils\ControllerUtils::get_all_controllers();
         $this->moduleClasses = utils\ModuleUtils::get_all_modules();
         $this->init_modules();
+        echo "Modules initialized\r\n";
+        utils\LogUtils::echo_welcome($this->get_welcome_url());
         $this->listen();
+    }
+
+    private function get_welcome_url(){
+        $protocolClass = $this->moduleClasses[SarkozyModule::PROTOCOL_MODULE];
+        $protocol = $this->protocol;
+        if ($protocolClass->hasMethod("get_protocol")){
+            $protocol = $this->modules[SarkozyModule::PROTOCOL_MODULE]->get_protocol();
+        }
+        return "$protocol://$this->host:$this->port";
     }
 
 
@@ -52,8 +68,10 @@ class SarkozyServer
     {
         $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
 
-        //HTTP Module should be last
-        $this->init_single_module(SarkozyModule::HTTP_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
+        //Protocol Module
+        $this->init_single_module(SarkozyModule::PROTOCOL_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
+
+        ModuleUtils::check_modules($this->moduleClasses);
     }
 
     private function init_single_module(int $module_flag, array $args){
@@ -61,8 +79,8 @@ class SarkozyServer
             $this->modules[$module_flag] = null;
             return;
         }
-        $httpModuleClass = $this->moduleClasses[$module_flag];
-        $this->modules[$module_flag] = $httpModuleClass
+        $protocolModuleClass = $this->moduleClasses[$module_flag];
+        $this->modules[$module_flag] = $protocolModuleClass
             ->newInstance(...$args);
     }
 
@@ -70,7 +88,7 @@ class SarkozyServer
         /**
          * @var api\SarkontrollerRequest $call
          */
-        $call = $this->modules[SarkozyModule::HTTP_MODULE]->get_call($request);
+        $call = $this->modules[SarkozyModule::PROTOCOL_MODULE]->get_call($request);
 
         $called_controller = $this->controllers[
             $call->controllerIndex
@@ -87,11 +105,9 @@ class SarkozyServer
     }
 
     private function listen(){
-        $host = 'localhost';
-        $port = $this->port;
-        $http_module = $this->modules[SarkozyModule::HTTP_MODULE];
+        $protocol_module = $this->modules[SarkozyModule::PROTOCOL_MODULE];
 
-        $server = stream_socket_server("tcp://$host:$port", $errno, $errstr);
+        $server = stream_socket_server("$this->protocol://$this->host:$this->port", $errno, $errstr);
         if (!$server) {
             die("Runtime error : server failed to start $errstr ($errno)\n");
         }
@@ -100,13 +116,13 @@ class SarkozyServer
             /**
              * @var api\Request $request
              */
-            $request = $http_module->get_request($client);
+            $request = $protocol_module->get_request($client);
 
             $controllerReturn = $this->get_return_value($request);
 
-            $request = $http_module->handle_response($request, $controllerReturn);
+            $request = $protocol_module->handle_response($request, $controllerReturn);
 
-            $raw_response = $http_module->get_raw_response($request);
+            $raw_response = $protocol_module->get_raw_response($request);
             fwrite($client, $raw_response);
             fclose($client);
         }
