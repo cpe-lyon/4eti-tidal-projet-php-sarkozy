@@ -6,7 +6,9 @@
     "autoload": {
         "psr-4": {
             "PhpSarkozy\\Http\\": "src/",
-            "PhpSarkozy\\Http\\api": "src/api/"
+            "PhpSarkozy\\Http\\api": "src/api/",
+            "PhpSarkozy\\Http\\attributes":"src/attributes",
+            "PhpSarkozy\\Http\\utils":"src/utils"
         }
     },
     "authors": [

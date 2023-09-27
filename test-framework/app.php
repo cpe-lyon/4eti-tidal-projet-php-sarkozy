@@ -24,20 +24,6 @@ class FakeView implements SarkoView{
     }
 }
 
-
-class FakeJson implements SarkoJson{
-    function get_value(): array{
-        $array = array (
-            "toto",
-            24,
-            "fruits"  => array("a" => "orange", "b" => "banana", "c" => "apple"),
-            "numbers" => array(1, 2, 3, 4, 5, 6),
-            "holes"   => array("first", 5 => "second", "third")
-        );
-        return $array;
-    }
-}
-
 #[Sarkontroller]
 class MonController{
     public function ltdt($title="Mon Titre")
@@ -45,7 +31,17 @@ class MonController{
         return new FakeView();
     }
     public function json(){
-        return new FakeJson();
+        return array (
+            "toto",
+            24,
+            "fruits"  => array("a" => "orange", "b" => "banana", "c" => "apple"),
+            "numbers" => array(1, 2, 3, 4, 5, 6),
+            "holes"   => array("first", 5 => "second", "third")
+        );
+    }
+
+    public function string(){
+        return "test string";
     }
 }
 
