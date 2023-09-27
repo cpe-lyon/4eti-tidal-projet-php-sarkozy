@@ -9,18 +9,27 @@ use PhpSarkozy\core\attributes\Sarkontroller;
 
 use PhpSarkozy\Http\HttpModule;
 echo "Enabled ". HttpModule::NAME . "\n";
+use PhpSarkozy\LeTempsDesTemplates\LeTempsDesTemplatesModule;
+use PhpSarkozy\LeTempsDesTemplates\Template;
+
+echo "Enabling ".LeTempsDesTemplatesModule::MODULE_NAME."\n";
 
 echo "Starting PHP Sarkozy...\n";
+
+use PhpSarkozy\LeTempsDesTemplates\LtdtView;
 
 class FakeView implements SarkoView{
     function get_view_reference(): string
     {
-        return "ok";
+        return "temps.ltdt";
     }
 
     function get_view_args(): array
     {
-        return array();
+        return array(
+            "titre" => "SarkoTest",
+            "contenu" => "Bonjour, je suis le SarkoTest et j'aime quand ça marche"
+        );
     }
 }
 

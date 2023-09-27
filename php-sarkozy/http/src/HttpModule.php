@@ -18,9 +18,8 @@ final class HttpModule{
     private HttpParser $parser;
 
     public function __construct(array $controllers, array $modules){
-        //TODO: true ref when templating server commited
-        $this->template_module = array_key_exists("SarkozyModule::TEMPLATE_MODULE", $modules) ?
-            $modules["SarkozyModule::TEMPLATE_MODULE"] : null;
+        $this->template_module = array_key_exists(SarkozyModule::TEMPLATE_MODULE, $modules) ?
+            $modules[SarkozyModule::TEMPLATE_MODULE] : null;
         //TO-DO
 
         $this->parser = new HttpParser();

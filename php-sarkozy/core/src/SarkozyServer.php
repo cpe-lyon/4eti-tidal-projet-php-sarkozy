@@ -22,14 +22,19 @@ class SarkozyServer
     private array $modules = array();
 
     private int $port;
-
+  
     private $host = 'localhost';
 
     private $protocol = 'tcp';
+    private ?string $viewsPath;
 
-    function __construct(int $port = 2007)
+    function __construct(int $port = 2007, string $viewsPath = null)
     {
         $this->port = $port;
+        $this->viewsPath = $viewsPath;
+        if($viewsPath === null){
+            $this->viewsPath = getcwd()."/views";
+        }
     }
 
     /**
@@ -60,9 +65,10 @@ class SarkozyServer
     //TODO @josse.de-oliveira: check modules definition
     private function init_modules()
     {
+        $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
+
         //Protocol Module
         $this->init_single_module(SarkozyModule::PROTOCOL_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
-
 
         ModuleUtils::check_modules($this->moduleClasses);
     }
