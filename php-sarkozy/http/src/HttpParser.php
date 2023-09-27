@@ -3,6 +3,7 @@
 namespace PhpSarkozy\Http;
 
 use PhpSarkozy\core\api\Request as Request;
+use PhpSarkozy\Http\api\HttpRequest;
 
 class HttpParser{
 
@@ -10,7 +11,7 @@ class HttpParser{
 
     }
 
-    function get_request($client) : Request {
+    function get_request($client) : HttpRequest {
         $request_line = fgets($client);
 
         // Http method and path extraction
@@ -30,7 +31,7 @@ class HttpParser{
             $body = fread($client, $content_length);
         }
 
-        return new Request($client, $method, $path, $headers, $body);
+        return new HttpRequest($client, $method, $path, $headers, $body);
     }
 
     private function get_message_for_status(int $status){
@@ -41,7 +42,7 @@ class HttpParser{
         }
     }
 
-    function get_raw_response(Request $request): String{
+    function get_raw_response(HttpRequest $request): String{
         $res = "";
         $response = $request->get_response();
         

@@ -1,9 +1,9 @@
 <?php
 namespace PhpSarkozy\Http;
 
-use PhpSarkozy\core\api\SarkoError;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\core\api\Request;
+use PhpSarkozy\Http\api\HttpResponse;
 use PhpSarkozy\core\api\Response;
 use PhpSarkozy\core\api\SarkoError as ApiSarkoError;
 use PhpSarkozy\core\api\SarkoView as SarkoView;
@@ -49,7 +49,7 @@ final class HttpModule{
 
     private function handle_error(Request $request, $controller_response): Request{
         //TODO @theo.clere: error management
-        $res = new Response("Error 404");
+        $res = new HttpResponse("Error 404");
         $res->set_code(404);
         $request->set_response($res);
         return $request;
@@ -81,9 +81,9 @@ final class HttpModule{
         return $request;
     }
 
-    function get_json_response(SarkoJson $sarko_json): Response{
+    function get_json_response(SarkoJson $sarko_json): HttpResponse{
         $body = json_encode($sarko_json->get_value());
-        $response = new Response($body);
+        $response = new HttpResponse($body);
         $response->set_code(200);
         $response->set_content_type("Application/json");
         $response->set_content_length(strlen($body));
