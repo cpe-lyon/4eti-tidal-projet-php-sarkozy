@@ -2,8 +2,7 @@
 
 namespace PhpSarkozy\core;
 
-use LogUtils;
-use PhpSarkozy\core\api\SarkoError;
+use PhpSarkozy\core\utils;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\core\utils\ModuleUtils;
 
@@ -95,8 +94,9 @@ class SarkozyServer
         ];
 
         if(!$called_controller->hasMethod($call->controllerMethod)){
-            //TODO @theo.clere Error parsing
-            return new SarkoError(SarkoError::CANT_CALL_CONTROLLER);
+            $error_message = "A problem occurred during controller method resolution";
+            echo($error_message);
+            throw new \Exception($error_message);
         }
 
         $controller_instance = $called_controller->newInstance();
@@ -118,7 +118,11 @@ class SarkozyServer
              */
             $request = $protocol_module->get_request($client);
 
-            $controllerReturn = $this->get_return_value($request);
+            try{
+                $controllerReturn = $this->get_return_value($request);
+            }catch(\Exception $e){
+                $controllerReturn = $e;
+            }
 
             $request = $protocol_module->handle_response($request, $controllerReturn);
 

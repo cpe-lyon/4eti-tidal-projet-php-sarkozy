@@ -3,7 +3,7 @@
 namespace PhpSarkozy\LeTempsDesTemplates;
 
 use PhpSarkozy\core\attributes\SarkozyModule;
-use PhpSarkozy\core\api\Response;
+use PhpSarkozy\Http\api\HttpResponse;
 
 #[SarkozyModule(SarkozyModule::TEMPLATE_MODULE)]
 class LeTempsDesTemplatesModule
@@ -19,7 +19,7 @@ class LeTempsDesTemplatesModule
     }
 
 
-    function get_template_response(string $templatename, array $args): Response{
+    function get_template_response(string $templatename, array $args): HttpResponse{
 
         $file_path = $this->path . "/" . $templatename;
         
@@ -27,7 +27,7 @@ class LeTempsDesTemplatesModule
         $template->array_assign($args);
         $compiled_html = $template->render();
 
-        $response = new Response($compiled_html);
+        $response = new HttpResponse($compiled_html);
         $response->set_code(200);
 
         return $response;
