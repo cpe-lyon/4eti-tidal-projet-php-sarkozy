@@ -88,6 +88,7 @@ class SarkozyServer
          * @var api\SarkontrollerRequest $call
          */
         $call = $this->modules[SarkozyModule::PROTOCOL_MODULE]->get_call($request);
+        $request->call = $call;
 
         $called_controller = $this->controllers[
             $call->controllerIndex
@@ -95,7 +96,7 @@ class SarkozyServer
 
         if(!$called_controller->hasMethod($call->controllerMethod)){
             $error_message = "A problem occurred during controller method resolution";
-            echo($error_message);
+            echo $error_message."\n";
             throw new \Exception($error_message);
         }
 
@@ -124,7 +125,11 @@ class SarkozyServer
                 $controllerReturn = $e;
             }
 
-            $request = $protocol_module->handle_response($request, $controllerReturn);
+            try{
+                $request = $protocol_module->handle_response($request, $controllerReturn);
+            }catch(\Exception $e){
+                $request = $protocol_module->handle_response($request, $e);
+            }
 
             $raw_response = $protocol_module->get_raw_response($request);
             fwrite($client, $raw_response);
