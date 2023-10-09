@@ -42,12 +42,12 @@ class HttpParser{
                 $sarko_view = $controller_response;
                 return $this->template_module->get_template_response($sarko_view->get_view_reference(), $sarko_view->get_view_args());
             case HttpResponseType::STRING_RAW:
-                $res = HttpResponse::create200($controller_response);
+                $res = HttpResponse::createOK($controller_response);
                 $res->set_content_type($produces == null ? "text/plain" : $produces->get_content_type());
                 return $res;
             default:
             case HttpResponseType::JSON:
-                $res = HttpResponse::create200(json_encode($controller_response));
+                $res = HttpResponse::createOK(json_encode($controller_response));
                 $res->set_content_type($produces == null ? "application/json" : $produces->get_content_type());
                 return $res;
         }
