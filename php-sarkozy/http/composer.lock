@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "370dcaaf00d58cd7c7257ebb65ef359a4a08373a"
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
             },
             "type": "library",
             "autoload": {
@@ -49,5 +49,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

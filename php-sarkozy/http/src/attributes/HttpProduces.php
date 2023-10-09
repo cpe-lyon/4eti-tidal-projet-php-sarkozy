@@ -4,7 +4,7 @@ namespace PhpSarkozy\Http\attributes;
 
 use Attribute;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[Attribute(Attribute::TARGET_METHOD)]
 final class HttpProduces implements HttpAttributeInterface{
     private string $content_type;
 
