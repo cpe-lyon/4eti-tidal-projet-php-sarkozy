@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be5cd055ac70363fb0cb99ee39761af9",
+    "content-hash": "81faaf9f1990a412e6ad903f7f5b0b82",
     "packages": [
         {
             "name": "php-sarkozy/core",

@@ -1,6 +1,7 @@
 <?php
 namespace PhpSarkozy\Http;
 
+use HttpTemplateModuleInterface;
 use PhpSarkozy\core\api\Request;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\Http\api\HttpResponse;
@@ -9,16 +10,22 @@ use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\api\HttpRequest;
 use PhpSarkozy\Http\attributes\HttpEnforceHeader;
 use PhpSarkozy\Http\models\HttpControllerRecord;
+use PhpSarkozy\Http\models\HttpRouterInterface;
 use PhpSarkozy\Http\utils\HttpAttributesUtils;
+use PhpSarkozy\Http\utils\HttpMethodUtils;
 
 #[SarkozyModule(SarkozyModule::PROTOCOL_MODULE)]
 final class HttpModule{
 
     final const NAME = "HTTP-MODULE";
-
+    /**
+     * @var HttpTemplateModuleInterface
+     */
     private $template_module;
 
     private HttpParser $parser;
+
+    private HttpRouterInterface $router;
 
     /**
      * @var HttpControllerRecord[]
@@ -34,6 +41,18 @@ final class HttpModule{
             fn($c) => new HttpControllerRecord($c),
             $controllers
         ); 
+
+        /**
+         * 
+         */
+        $routerModule = array_key_exists(SarkozyModule::ROUTING_MODULE, $modules) ?
+        $modules[SarkozyModule::ROUTING_MODULE] : null;
+
+        if ($routerModule == null){
+            $this->router = new HttpDefaultRouter();
+        }else{
+            $this->router = $routerModule;
+        }
 
         $this->parser = new HttpParser($this->template_module);
 
@@ -65,7 +84,7 @@ final class HttpModule{
     {
         $this->check_request($request);
         $path = $request->get_uri();
-        return HttpDefaultRouter::get_call($path);
+        return HttpDefaultRouter::get_call($path, HttpMethodUtils::parse_method($request->get_method()));
         //TODO @josse.de-oliveira routing with $this->controllers[$skReq->controllerIndex];
     }
 

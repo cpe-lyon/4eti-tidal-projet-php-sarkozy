@@ -15,7 +15,7 @@ class HttpControllerMethodRecord{
 
 
     /**
-     * @var array<string,HttpAttributeInterface>
+     * @var aray(string,HttpAttributeInterface, boolean)
      */
     public array $params;
 
@@ -28,10 +28,10 @@ class HttpControllerMethodRecord{
     }
 
     private function parseParams(\ReflectionParameter $param){
-        $name =  $param->getName().($param->isOptional()?'?':'');
+        $name =  $param->getName();
         $attrClasses = $param->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
-        $value = array_map( fn($a) => $this->instanciate($a) , $attrClasses);
-        return [ $name => $value ];
+        $attrs = array_map( fn($a) => $this->instanciate($a) , $attrClasses);
+        return [ $name, $attrs, $param->isOptional() ];
     }
 
     public function __construct(\ReflectionMethod $method){

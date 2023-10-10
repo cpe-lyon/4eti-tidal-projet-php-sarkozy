@@ -2,11 +2,12 @@
 
 namespace PhpSarkozy\LeTempsDesTemplates;
 
+use HttpTemplateModuleInterface;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\Http\api\HttpResponse;
 
 #[SarkozyModule(SarkozyModule::TEMPLATE_MODULE)]
-class LeTempsDesTemplatesModule
+class LeTempsDesTemplatesModule implements HttpTemplateModuleInterface
 {
 
     private $path = "";
