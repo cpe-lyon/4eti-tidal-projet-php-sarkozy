@@ -2,9 +2,9 @@
 
 namespace PhpSarkozy\LeTempsDesTemplates;
 
-use HttpTemplateModuleInterface;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\Http\api\HttpResponse;
+use PhpSarkozy\Http\models\HttpTemplateModuleInterface;
 
 #[SarkozyModule(SarkozyModule::TEMPLATE_MODULE)]
 class LeTempsDesTemplatesModule implements HttpTemplateModuleInterface

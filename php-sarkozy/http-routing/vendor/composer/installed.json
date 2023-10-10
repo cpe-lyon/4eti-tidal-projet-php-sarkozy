@@ -2,8 +2,8 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-http/attribute-parsing",
-            "version_normalized": "dev-http/attribute-parsing",
+            "version": "dev-routing/routing-module",
+            "version_normalized": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -37,8 +37,8 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-http/attribute-parsing",
-            "version_normalized": "dev-http/attribute-parsing",
+            "version": "dev-routing/routing-module",
+            "version_normalized": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../http",

@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81faaf9f1990a412e6ad903f7f5b0b82",
+    "content-hash": "888f3b57d56b54009fa418da7481e458",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-http/attribute-parsing",
+            "version": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -40,7 +40,7 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-http/attribute-parsing",
+            "version": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../http",

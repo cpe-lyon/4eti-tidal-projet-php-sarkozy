@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-main",
+            "version": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../core",

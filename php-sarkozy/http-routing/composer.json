@@ -4,7 +4,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PhpSarkozy\\HttpRouting\\": "src/"
+            "PhpSarkozy\\HttpRouting\\": "src/",
+            "PhpSarkozy\\HttpRouting\\attributes\\": "src/attributes/"
         }
     },
     "authors": [

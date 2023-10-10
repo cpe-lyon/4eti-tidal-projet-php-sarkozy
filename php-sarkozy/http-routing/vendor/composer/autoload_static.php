@@ -18,6 +18,7 @@ class ComposerStaticInit86cc67fa59bb78ee5b8ed3473abefec9
             'PhpSarkozy\\Http\\attributes\\' => 27,
             'PhpSarkozy\\Http\\api\\' => 20,
             'PhpSarkozy\\Http\\' => 16,
+            'PhpSarkozy\\HttpRouting\\attributes\\' => 34,
             'PhpSarkozy\\HttpRouting\\' => 23,
         ),
     );
@@ -58,6 +59,10 @@ class ComposerStaticInit86cc67fa59bb78ee5b8ed3473abefec9
         'PhpSarkozy\\Http\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-sarkozy/http/src',
+        ),
+        'PhpSarkozy\\HttpRouting\\attributes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/attributes',
         ),
         'PhpSarkozy\\HttpRouting\\' => 
         array (

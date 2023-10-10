@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpSarkozy\routing\attributes;
+namespace PhpSarkozy\HttpRouting\attributes;
 
 use PhpSarkozy\Http\attributes\HttpAttributeInterface;
 use PhpSarkozy\Http\utils\HttpMethodsEnum;
@@ -9,9 +9,18 @@ use PhpSarkozy\Http\utils\HttpMethodUtils;
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class HttpPath implements HttpAttributeInterface{
 
-    public readonly String $pathreg;
+    private String $pathreg;
 
-    public readonly int $priority;
+    private int $priority;
+
+    public function get_path_regex(){
+        return $this->pathreg;
+    }
+
+
+    public function get_priority(){
+        return $this->priority;
+    }
 
     public readonly HttpMethodsEnum $method;
 
@@ -59,7 +68,7 @@ class HttpPath implements HttpAttributeInterface{
         $this->priority = $prio;
     }
 
-    function __construct(String $path, String $method){
+    function __construct(String $path, String $method="get"){
         $this->method = HttpMethodUtils::parse_method($method);
         $this->init_path($path);
     }

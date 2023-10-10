@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpSarkozy\routing;
+namespace PhpSarkozy\HttpRouting;
 
 use Exception;
 use PhpSarkozy\core\api\SarkontrollerRequest;
@@ -8,9 +8,9 @@ use PhpSarkozy\Http\models\HttpControllerMethodRecord;
 use PhpSarkozy\Http\models\HttpControllerRecord;
 use PhpSarkozy\Http\models\HttpRouterInterface;
 use PhpSarkozy\Http\utils\HttpMethodsEnum;
-use PhpSarkozy\routing\attributes\HttpPath;
+use PhpSarkozy\HttpRouting\attributes\HttpPath;
 
-class HttpRouter extends HttpRouterInterface{
+class HttpRouter implements HttpRouterInterface{
 
 
 
@@ -18,11 +18,11 @@ class HttpRouter extends HttpRouterInterface{
      * @return HttpPath|false
      */
     private function get_method_path(HttpControllerMethodRecord $record){
-        return array_filter($record->attributes, fn($a) => $a instanceof HttpPath);
+        return current(array_filter($record->attributes, fn($a) => $a instanceof HttpPath));
     }
 
     private function get_paths_controller(int $idx, HttpControllerRecord $controller){
-        $methods = $controller->methods;
+        $methods = array_values($controller->methods);
 
         $pathed_methods = array_map(fn($m) => array(
             "method" => $m, 
@@ -46,19 +46,19 @@ class HttpRouter extends HttpRouterInterface{
     {
         $pathed_methods = array();
         foreach ($controllers as $idx => $controller) {
-            array_merge($pathed_methods, $this->get_paths_controller($idx, $controller));
+            $pathed_methods = array_merge($pathed_methods, $this->get_paths_controller($idx, $controller));
         }
 
-        usort($pathed_methods, fn($p1, $p2) => $p1["path"]->priority - $p2["path"]->priority);
+        usort($pathed_methods, fn($p1, $p2) => $p1["path"]->get_priority() - $p2["path"]->get_priority());
         $path_compilers = array(
-            HttpMethodsEnum::GET => array(),
-            HttpMethodsEnum::POST => array(),
-            HttpMethodsEnum::PUT => array(),
-            HttpMethodsEnum::DELETE => array()
+            HttpMethodsEnum::GET->value => array(),
+            HttpMethodsEnum::POST->value => array(),
+            HttpMethodsEnum::PUT->value => array(),
+            HttpMethodsEnum::DELETE->value => array()
         );
 
         foreach ($pathed_methods as $p) {
-            array_push($path_compilers[$p["path"]->method],  new HttpPathCompiler($p["idx"], $p["method"], $p["path"]));
+            array_push($path_compilers[$p["path"]->method->value],  new HttpPathCompiler($p["idx"], $p["method"], $p["path"]));
         }
 
         $this->path_compilers = $path_compilers;
@@ -69,8 +69,10 @@ class HttpRouter extends HttpRouterInterface{
     function get_call(string $path,  HttpMethodsEnum $method): SarkontrollerRequest{
         
         $sk_request = null;
-        $iter = new \ArrayIterator($this->path_compilers[$method]);
+        $iter = new \ArrayIterator($this->path_compilers[$method->value]);
 
+
+        //TODO: parse it
         $raw_path = "";
         $req_args = array();
 

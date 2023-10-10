@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpSarkozy\routing;
+namespace PhpSarkozy\HttpRouting;
 
 use PhpSarkozy\Http\models\HttpControllerMethodRecord;
-use PhpSarkozy\routing\attributes\HttpPath;
+use PhpSarkozy\HttpRouting\attributes\HttpPath;
 
 class HttpPathCompiler{
 
@@ -17,7 +17,7 @@ class HttpPathCompiler{
     public function __construct(int $controller_index, HttpControllerMethodRecord $method, HttpPath $src_path){
         $this->controller_index = $controller_index;
         $this->method = $method;
-        $this->pattern = $src_path->pathreg;
+        $this->pattern = $src_path->get_path_regex();
     }
 
     public function compile(string $raw_path, array $req_args){

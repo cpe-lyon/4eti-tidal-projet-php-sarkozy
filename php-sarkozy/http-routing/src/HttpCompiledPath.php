@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpSarkozy\routing;
+namespace PhpSarkozy\HttpRouting;
 
 use Exception;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\models\HttpControllerMethodRecord;
-use PhpSarkozy\routing\attributes\HttpInPath;
+use PhpSarkozy\HttpRouting\attributes\HttpInPath;
 
 class HttpCompiledPath extends SarkontrollerRequest{
 

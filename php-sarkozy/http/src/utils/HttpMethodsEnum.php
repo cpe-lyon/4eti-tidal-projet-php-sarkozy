@@ -2,9 +2,9 @@
 
 namespace PhpSarkozy\Http\utils;
 
-enum HttpMethodsEnum{
-    case GET;
-    case POST;
-    case PUT;
-    case DELETE;
+enum HttpMethodsEnum: string{
+    case GET = 'GET';
+    case POST = 'POST';
+    case PUT = 'PUT';
+    case DELETE = 'DELETE';
 }

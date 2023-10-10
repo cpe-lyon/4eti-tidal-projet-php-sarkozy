@@ -15,5 +15,6 @@ return array(
     'PhpSarkozy\\Http\\attributes\\' => array($vendorDir . '/php-sarkozy/http/src/attributes'),
     'PhpSarkozy\\Http\\api\\' => array($vendorDir . '/php-sarkozy/http/src/api'),
     'PhpSarkozy\\Http\\' => array($vendorDir . '/php-sarkozy/http/src'),
+    'PhpSarkozy\\HttpRouting\\attributes\\' => array($baseDir . '/src/attributes'),
     'PhpSarkozy\\HttpRouting\\' => array($baseDir . '/src'),
 );

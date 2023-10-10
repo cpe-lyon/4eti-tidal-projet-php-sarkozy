@@ -3,7 +3,7 @@
         'name' => 'php-sarkozy/http-routing',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f8d3ae11eb23769c75302b2574780c6ed94d46f8',
+        'reference' => '2cae8e9d055a6fb52ecdfaa14d7d5d6c07ee6679',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'php-sarkozy/core' => array(
-            'pretty_version' => 'dev-http/attribute-parsing',
-            'version' => 'dev-http/attribute-parsing',
+            'pretty_version' => 'dev-routing/routing-module',
+            'version' => 'dev-routing/routing-module',
             'reference' => 'a28a67d832d6860f49e91e48ab5384d699860775',
             'type' => 'library',
             'install_path' => __DIR__ . '/../php-sarkozy/core',
@@ -20,8 +20,8 @@
             'dev_requirement' => false,
         ),
         'php-sarkozy/http' => array(
-            'pretty_version' => 'dev-http/attribute-parsing',
-            'version' => 'dev-http/attribute-parsing',
+            'pretty_version' => 'dev-routing/routing-module',
+            'version' => 'dev-routing/routing-module',
             'reference' => '8745cd531ea5ff91c02dbe596cda5aaeb8b1f43c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../php-sarkozy/http',
@@ -31,7 +31,7 @@
         'php-sarkozy/http-routing' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f8d3ae11eb23769c75302b2574780c6ed94d46f8',
+            'reference' => '2cae8e9d055a6fb52ecdfaa14d7d5d6c07ee6679',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

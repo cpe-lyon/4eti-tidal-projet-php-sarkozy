@@ -5,7 +5,6 @@ use HttpTemplateModuleInterface;
 use PhpSarkozy\core\api\Request;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\Http\api\HttpResponse;
-use PhpSarkozy\core\api\SarkoView as SarkoView;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\api\HttpRequest;
 use PhpSarkozy\Http\attributes\HttpEnforceHeader;
@@ -51,7 +50,7 @@ final class HttpModule{
         if ($routerModule == null){
             $this->router = new HttpDefaultRouter();
         }else{
-            $this->router = $routerModule;
+            $this->router = $routerModule->create_router($this->controllers);
         }
 
         $this->parser = new HttpParser($this->template_module);
@@ -84,7 +83,7 @@ final class HttpModule{
     {
         $this->check_request($request);
         $path = $request->get_uri();
-        return HttpDefaultRouter::get_call($path, HttpMethodUtils::parse_method($request->get_method()));
+        return $this->router->get_call($path, HttpMethodUtils::parse_method($request->get_method()));
         //TODO @josse.de-oliveira routing with $this->controllers[$skReq->controllerIndex];
     }
 

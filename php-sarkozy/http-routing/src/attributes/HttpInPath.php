@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpSarkozy\routing\attributes;
+namespace PhpSarkozy\HttpRouting\attributes;
 
 use PhpSarkozy\Http\attributes\HttpAttributeInterface;
 
