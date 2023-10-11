@@ -4,7 +4,7 @@
 
 ```php
 #[HttpPath("/my-method","get")]
-function controllerMethod(String $name, String $timestamp){
+function controller_method(String $name, String $timestamp){
     $timestamp = intval($timestamp);
     $date = date("m.d.y", $timestamp);
     return "[$date] Hello $name";

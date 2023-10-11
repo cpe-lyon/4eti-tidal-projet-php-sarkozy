@@ -2,18 +2,27 @@
     "name": "php-sarkozy/http-routing",
     "description": "Routing submodule for PHP Sarkozy Http Module",
     "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ruben CLERC",
+            "email": "ruben.clerc@cpe.fr"
+        },
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        },
+        {
+            "name": "Josse DE OLIVEIRA",
+            "email": "josse.de-oliveira@cpe.fr"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "PhpSarkozy\\HttpRouting\\": "src/",
             "PhpSarkozy\\HttpRouting\\attributes\\": "src/attributes/"
         }
     },
-    "authors": [
-        {
-            "name": "Josse DE OLIVEIRA",
-            "email": "josse.de-oliveira@cpe.fr"
-        }
-    ],
     "require": {
         "php-sarkozy/core": "@dev",
         "php-sarkozy/http": "@dev"

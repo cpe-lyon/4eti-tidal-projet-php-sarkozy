@@ -12,17 +12,17 @@ final class ControllerUtils
     
  
     public static function get_all_controllers(): array{
-        $reflectionControllers = array();
+        $reflection_controllers = array();
         foreach( get_declared_classes() as $class){
-            $reflectionClass = new \ReflectionClass($class);
+            $reflection_class = new \ReflectionClass($class);
             if ( count(
-                $reflectionClass->getAttributes(Sarkontroller::class, \ReflectionAttribute::IS_INSTANCEOF)
+                $reflection_class->getAttributes(Sarkontroller::class, \ReflectionAttribute::IS_INSTANCEOF)
             ) > 0){
-                $reflectionControllers[] = $reflectionClass;
+                $reflection_controllers[] = $reflection_class;
             }
         }
 
-        return $reflectionControllers;
+        return $reflection_controllers;
     }
 
 }
