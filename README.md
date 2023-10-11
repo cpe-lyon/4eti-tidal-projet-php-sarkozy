@@ -27,9 +27,20 @@ Il a pour responsabilités de:
 * Convertir les objets Request en appels aux contrôleurs
 * Convertir les réponses de contrôleurs en objets Response
 * Convertir les objets Response en réponses HTTP en dur
-* Utiliser d'autres module pour ces tâches
-### RouterModule
-**TODO @josse.de-oliveira**
+* Utiliser d'autres modules pour ces tâches
+### HttpRoutingModule
+Ce module a pour responsabilité de faire connaitre au coeur applicatif quelle méthode de controller appeler en fonction du chemin et de la méthode
+Il est utilisé par le HttpModule pour convertir les Request en appels aux contrôleurs
+
+Le module calcule une priorité depuis le chemin, la priorité à un nombre de bits égale au nombre de slash, le bit le plus lourd est mis à 1, les autres bits indiquent si le mot entre les slash est statique (1) ou si c'est un argument (0) : \
+`/` -> 1 = 1 \
+`/[path]` -> 1 = 1 \
+`/[path]/` -> 1 0 = 2 \
+`/user/[id]/cart/` -> 1 1 0 1 = 13 \
+`/user/default/cart` -> 1 1 1 1 = 15 \
+
+Les priorités les plus grandes sont vérifiées en premier
+
 ### Le Temps des Templates
 Ce module a pour responsabilité de créer une réponse HTML depuis une vue en utilisant des fichiers de templates
 

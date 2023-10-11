@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-routing/routing-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
+                "reference": "403a1a900be97e16fb8c4614094bb386818b096f"
             },
             "type": "library",
             "autoload": {
@@ -30,6 +30,14 @@
                 {
                     "name": "Ruben CLERC",
                     "email": "ruben.clerc@cpe.fr"
+                },
+                {
+                    "name": "Theo CLERE",
+                    "email": "theo.clere@cpe.fr"
+                },
+                {
+                    "name": "Josse DE OLIVEIRA",
+                    "email": "josse.de-oliveira@cpe.fr"
                 }
             ],
             "description": "Un framework simple pour le cours TIDAL",

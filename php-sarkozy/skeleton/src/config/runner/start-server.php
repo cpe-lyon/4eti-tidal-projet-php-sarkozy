@@ -8,6 +8,6 @@ use PhpSarkozy\core\SarkozyLoader;
 new SarkozyLoader(__DIR__."/../../controllers");
 new SarkozyLoader(__DIR__."/../modules");
 
-$server = new SarkozyServer();
+$server = new SarkozyServer(viewsPath:__DIR__."/../../views");
 $server->run();
 ?>

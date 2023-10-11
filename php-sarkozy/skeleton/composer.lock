@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-routing/routing-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -40,7 +40,7 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-routing/routing-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../http",
@@ -76,7 +76,7 @@
         },
         {
             "name": "php-sarkozy/http-routing",
-            "version": "dev-routing/routing-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../http-routing",
@@ -110,7 +110,7 @@
         },
         {
             "name": "php-sarkozy/le-temps-des-templates",
-            "version": "dev-routing/routing-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../le-temps-des-templates",

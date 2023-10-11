@@ -2,17 +2,25 @@
     "name": "php-sarkozy/le-temps-des-templates",
     "description": "Moteur de templating du framework PHP Sarkozy",
     "type": "library",
+    "authors": [
+        {
+            "name": "Ruben CLERC",
+            "email": "ruben.clerc@cpe.fr"
+        },
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        },
+        {
+            "name": "Josse DE OLIVEIRA",
+            "email": "josse.de-oliveira@cpe.fr"
+        }
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
             "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Josse DE OLIVEIRA",
-            "email": "josse.de-oliveira@cpe.fr"
-        }
-    ],
     "require": {}
 }

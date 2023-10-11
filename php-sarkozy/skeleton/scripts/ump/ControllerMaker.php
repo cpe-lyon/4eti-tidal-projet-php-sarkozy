@@ -18,13 +18,63 @@ class ControllerMaker{
 
     static private function get_content($name, array $methods){
 
+        $has_path = false;
+        $has_inpath = false;
         $content = "";
 
-        foreach ($methods as $methodName => $_value) {
-            $content.= "  public function $methodName(){\r\n    return '';\r\n  }\r\n"; 
+        $args = "";
+
+        foreach ($methods as $methodName => $metamethod) {
+            if (isset($metamethod["route"])){
+                $path = str_replace('"', '\\"', $metamethod["route"]);
+                $psplit = explode('?', $path, 2);
+                $arglist = array();
+                if (count($psplit) > 1){
+                    $explicitargs = explode('&', $psplit[1]);
+                    $arglist = $explicitargs == false ? array() : $explicitargs;
+                }
+                $route = $psplit[0];
+
+
+                foreach($arglist as $a){
+                    $args.= ($args==""?"":",")." \$$a ";
+                }
+
+                //in path
+                $matches = array();
+                preg_match_all('/\\[([^\\]]+)\\]/', $route, $matches);
+                $inpatharglist= $matches[1];
+                if (count($inpatharglist) > 0){
+                    $has_inpath = true;
+                }
+
+                foreach($inpatharglist as $a){
+                    $varname = $a;
+                    //Prevent variable conflict
+                    while( in_array($varname, $arglist)) {
+                        $varname = "_$varname";
+                    }
+
+                    $args.= ($args==""?"":",")." #[HttpInPath(\"$a\")] \$$varname ";
+                }
+
+                $content .= "  #[HttpPath(\"$route\")]\r\n";
+                $has_path = true;
+            }
+
+            $content.= "  public function $methodName($args){\r\n    return '';\r\n  }\r\n"; 
         }
 
-        return ControllerMaker::CONTENT_HEADER."#[Sarkontroller]\r\nclass $name{\r\n$content\r\n}".ControllerMaker::CONTENT_FOOTER;
+        $additionalImports="";
+        if($has_path){
+            $additionalImports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpPath;\r\n";
+        }
+        if($has_inpath){
+            $additionalImports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpInPath;\r\n";
+        }
+
+
+        return ControllerMaker::CONTENT_HEADER.$additionalImports."#[Sarkontroller]\r\nclass $name{\r\n$content\r\n}".ControllerMaker::CONTENT_FOOTER;
     }
 
     static private function check_and_get_file($name){
@@ -45,9 +95,12 @@ class ControllerMaker{
         }
 
         $methodFlag = 0;
+        $route_flag= 0;
 
         $methods = array();
         $name = null;
+
+        $last_method = null;
         foreach(array_slice($args, 1) as $a){
             if( $a!='' && $a[0] == '-'){
                 foreach(str_split(substr($a, 1)) as $c){
@@ -55,6 +108,9 @@ class ControllerMaker{
                         case 'm':
                             $methodFlag = 1;
                             break;
+                        case 'r':
+                            $route_flag=1;
+                            break;    
                         default:
                             throw new Exception("Unknown option flag '$c'");
                     }
@@ -63,6 +119,13 @@ class ControllerMaker{
                 if($methodFlag){
                     $methods[$a] = array();
                     $methodFlag = 0;
+                    $last_method = $a;
+                }else if($route_flag && $last_method == null){
+                    throw new Exception("You should use 'r' flag with 'm'");
+                } else if($route_flag){
+                    $methods[$last_method]["route"] = $a;
+                    $last_method = null;
+                    $route_flag = false;
                 }else if ($name != null){
                     throw new Exception("Two controller names were given: 1 needed");
                 }else{
@@ -70,6 +133,10 @@ class ControllerMaker{
                 }
 
             }
+        }
+
+        if ($methodFlag || $route_flag){
+            throw new Exception("Incomplete flag");
         }
 
 

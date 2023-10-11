@@ -78,6 +78,7 @@ class ShellTool{
         $this->help_cmd("mk-controller", "Make a controller");
         $this->help_opt("<controller-name>", "ASCII letters only, name of the class");
         $this->help_opt("-m <method-name>", "snake_case method name (optional, can be used several times in a single command)");
+        $this->help_opt("-mr <method-name> <path>", "add path to method: in-path arguments-> '/resource/[arg]' , arguments -> '/resource?arg1&arg2' ");
         echo "\r\n";
         $this->help_cmd("exit", "Exit UMP");
         echo "\r\n";
@@ -118,7 +119,7 @@ $continu = true;
 
 while($continu){
     $prompt = $sh->ask();
-    preg_match_all('/(?:[^\s"\'][^\s]+|\'(?:\\\'|[^\']+)*\'|"(?:\\"|[^"]+)*")/', $prompt, $matches );
+    preg_match_all('/(?:[^\s"\'][^\s]*|\'(?:\\\'|[^\']+)*\'|"(?:\\"|[^"]+)*")/', $prompt, $matches );
     $args = $matches[0];
     if ($sh->exec($args)){
         $continu = false;

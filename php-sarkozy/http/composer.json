@@ -2,6 +2,20 @@
     "name": "php-sarkozy/http",
     "description": "Le module http pour php-sarkozy",
     "type": "library",
+    "authors": [
+        {
+            "name": "Ruben CLERC",
+            "email": "ruben.clerc@cpe.fr"
+        },
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        },
+        {
+            "name": "Josse DE OLIVEIRA",
+            "email": "josse.de-oliveira@cpe.fr"
+        }
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -12,12 +26,6 @@
             "PhpSarkozy\\Http\\models\\":"src/models/"
         }
     },
-    "authors": [
-        {
-            "name": "Theo CLERE",
-            "email": "theo.clere@cpe.fr"
-        }
-    ],
     "require": {
         "php-sarkozy/core": "@dev"
     },
