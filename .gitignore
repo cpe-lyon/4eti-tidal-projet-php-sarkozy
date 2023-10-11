@@ -1,6 +1,7 @@
 /php-sarkozy/core/vendor/
 /test-framework/vendor/
 /php-sarkozy/http/vendor/
+/php-sarkozy/http-routing/vendor/
 /php-sarkozy/skeleton/vendor/
 /php-sarkozy/skeleton/src/controllers/
 /.vscode

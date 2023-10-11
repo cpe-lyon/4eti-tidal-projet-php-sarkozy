@@ -71,7 +71,6 @@ class HttpRouter implements HttpRouterInterface{
         $sk_request = null;
         $iter = new \ArrayIterator($this->path_compilers[$method->value]);
 
-        //TODO: parse it
         $raw_path = parse_url($path, PHP_URL_PATH);
         $req_args = array();
         $req_query = parse_url($path, PHP_URL_QUERY);
