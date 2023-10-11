@@ -5,6 +5,17 @@ class ControllerMaker{
     const CONTENT_HEADER = "<?php\r\n\r\n"."use PhpSarkozy\core\attributes\Sarkontroller;\r\n\r\n";
     const CONTENT_FOOTER = "\r\n\r\n?>\r\n";
 
+
+    private static function get_controller_dir(){
+        return __DIR__."/../../src/controllers";
+    }
+
+    public static function init(){
+        if (!is_dir(ControllerMaker::get_controller_dir())){
+            mkdir(ControllerMaker::get_controller_dir());
+        }
+    }
+
     static private function get_content($name, array $methods){
 
         $content = "";
@@ -24,7 +35,7 @@ class ControllerMaker{
             throw new Exception("Controller name should only contain ASCII letters");
         }
         $name = strtoupper($name[0]).substr($name, 1);
-        return  __DIR__."/../../src/controllers/$name.php";
+        return  ControllerMaker::get_controller_dir()."/$name.php";
 
     }
 

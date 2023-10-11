@@ -67,6 +67,8 @@ class SarkozyServer
     {
         $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
 
+        $this->init_single_module(SarkozyModule::ROUTING_MODULE, []);
+
         //Protocol Module
         $this->init_single_module(SarkozyModule::PROTOCOL_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
 
@@ -112,6 +114,12 @@ class SarkozyServer
         if (!$server) {
             die("Runtime error : server failed to start $errstr ($errno)\n");
         }
+
+        pcntl_signal(SIGINT, function () use ($server) {
+            fclose($server);
+            echo "Serveur arrêté.\n";
+            exit();
+        });
         
         while ($client = stream_socket_accept($server, -1)) {
             /**

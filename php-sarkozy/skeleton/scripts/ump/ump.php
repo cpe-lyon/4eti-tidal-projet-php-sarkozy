@@ -2,6 +2,8 @@
 
 require_once "ControllerMaker.php";
 
+ControllerMaker::init();
+
 class ShellTool{
 
     private $shellcolored;

@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be5cd055ac70363fb0cb99ee39761af9",
+    "content-hash": "f2cdd8aa115b31a0c5712a0ad548cd24",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-ump/cli-tool",
+            "version": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -40,11 +40,11 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-ump/cli-tool",
+            "version": "dev-routing/routing-module",
             "dist": {
                 "type": "path",
                 "url": "../http",
-                "reference": "8db874f1172447cc5b455544eef1a043c11764d1"
+                "reference": "8745cd531ea5ff91c02dbe596cda5aaeb8b1f43c"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -52,7 +52,11 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PhpSarkozy\\Http\\": "src/"
+                    "PhpSarkozy\\Http\\": "src/",
+                    "PhpSarkozy\\Http\\api\\": "src/api/",
+                    "PhpSarkozy\\Http\\attributes\\": "src/attributes/",
+                    "PhpSarkozy\\Http\\utils\\": "src/utils/",
+                    "PhpSarkozy\\Http\\models\\": "src/models/"
                 }
             },
             "license": [
@@ -69,6 +73,69 @@
                 "symlink": true,
                 "relative": true
             }
+        },
+        {
+            "name": "php-sarkozy/http-routing",
+            "version": "dev-routing/routing-module",
+            "dist": {
+                "type": "path",
+                "url": "../http-routing",
+                "reference": "fdd2f62b3c5dff9967ade12030841e84b62bec1c"
+            },
+            "require": {
+                "php-sarkozy/core": "@dev",
+                "php-sarkozy/http": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\HttpRouting\\": "src/",
+                    "PhpSarkozy\\HttpRouting\\attributes\\": "src/attributes/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josse DE OLIVEIRA",
+                    "email": "josse.de-oliveira@cpe.fr"
+                }
+            ],
+            "description": "Routing submodule for PHP Sarkozy Http Module",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "php-sarkozy/le-temps-des-templates",
+            "version": "dev-routing/routing-module",
+            "dist": {
+                "type": "path",
+                "url": "../le-temps-des-templates",
+                "reference": "c9bd8f34b93d3be88c42d7f1fcb19dfaa0e7ef3b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josse DE OLIVEIRA",
+                    "email": "josse.de-oliveira@cpe.fr"
+                }
+            ],
+            "description": "Moteur de templating du framework PHP Sarkozy",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         }
     ],
     "packages-dev": [],
@@ -76,7 +143,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "php-sarkozy/core": 20,
-        "php-sarkozy/http": 20
+        "php-sarkozy/http": 20,
+        "php-sarkozy/http-routing": 20,
+        "php-sarkozy/le-temps-des-templates": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
