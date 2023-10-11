@@ -2,5 +2,6 @@
 /test-framework/vendor/
 /php-sarkozy/http/vendor/
 /php-sarkozy/skeleton/vendor/
+/php-sarkozy/skeleton/src/controllers/
 /.vscode
 /index.html

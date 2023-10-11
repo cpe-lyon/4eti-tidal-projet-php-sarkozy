@@ -3,7 +3,7 @@
 ## Basic usage
 
 ```php
-#[HttpPath("/my-method", method="get")]
+#[HttpPath("/my-method","get")]
 function controllerMethod(String $name, String $timestamp){
     $timestamp = intval($timestamp);
     $date = date("m.d.y", $timestamp);
@@ -21,7 +21,7 @@ Arguments from GET will always be String.
 
 ## In-path arguments
 ```php
-#[HttpPath("/hello/[username]", method="post")]
+#[HttpPath("/hello/[username]", "post")]
 function hello(#[HttpInPath("username")] $name){
     return "Hello $name";
 }

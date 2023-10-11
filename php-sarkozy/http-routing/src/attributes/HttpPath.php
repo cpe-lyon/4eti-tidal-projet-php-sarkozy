@@ -29,8 +29,11 @@ class HttpPath implements HttpAttributeInterface{
         if ($trailing_slash){
             $path = substr($path, 0, strlen($path)-1);
         }
+        if (str_starts_with($path, '/')){
+            $path = substr($path, 1);
+        }
         
-        $splitted =explode('/', $path, -1);
+        $splitted =preg_split('/\\//', $path);
         $slashes = count($splitted);
 
         $match_all_idx = $trailing_slash ? -1 : $slashes-1;
@@ -43,7 +46,7 @@ class HttpPath implements HttpAttributeInterface{
         foreach ($splitted as $key=>$tag) {
             $prio *= 2;
             $match = array();
-            $is_argument = preg_match('/^\[(.*)\]$/', $tag) != false;
+            $is_argument = preg_match('/^\[(.*)\]$/', $tag, $match) != false;
             if ( !$is_argument){
                 //Is $slashes equal, "not argument" is prioritary 
                 $prio += 1;
@@ -56,9 +59,9 @@ class HttpPath implements HttpAttributeInterface{
                     $match[1]
                 );
 
-                $reg='[^\\/]';
+                $reg='[^\\/]+';
                 if ($key == $match_all_idx ){
-                    $reg='.*';
+                    $reg='.+';
                 }
 
                 $this->pathreg .= "\\/(?<{$group}>$reg)";

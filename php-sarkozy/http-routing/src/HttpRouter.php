@@ -49,7 +49,7 @@ class HttpRouter implements HttpRouterInterface{
             $pathed_methods = array_merge($pathed_methods, $this->get_paths_controller($idx, $controller));
         }
 
-        usort($pathed_methods, fn($p1, $p2) => $p1["path"]->get_priority() - $p2["path"]->get_priority());
+        usort($pathed_methods, fn($p1, $p2) => $p2["path"]->get_priority() - $p1["path"]->get_priority());
         $path_compilers = array(
             HttpMethodsEnum::GET->value => array(),
             HttpMethodsEnum::POST->value => array(),
@@ -71,13 +71,14 @@ class HttpRouter implements HttpRouterInterface{
         $sk_request = null;
         $iter = new \ArrayIterator($this->path_compilers[$method->value]);
 
-
         //TODO: parse it
-        $raw_path = "";
+        $raw_path = parse_url($path, PHP_URL_PATH);
         $req_args = array();
+        $req_query = parse_url($path, PHP_URL_QUERY);
+        parse_str($req_query, $req_args);
 
         while($sk_request == null && $iter->valid()){
-            $iter->current()->compile($raw_path, $req_args);
+            $sk_request = $iter->current()->compile($raw_path, $req_args);
             $iter->next();
         }
         if ($sk_request == null){

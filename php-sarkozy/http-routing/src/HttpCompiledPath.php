@@ -11,7 +11,7 @@ class HttpCompiledPath extends SarkontrollerRequest{
 
 
 
-    private function parse_param(string $pname, array $pattrs, bool $optional, array $path_matches, array $request_args , array $target){
+    private function parse_param(string $pname, array $pattrs, bool $optional, array $path_matches, array $request_args , array &$target){
         $in_path_arr = array_filter( 
             $pattrs,
             fn($attr)=> ($attr instanceof HttpInPath)
