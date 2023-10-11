@@ -84,13 +84,13 @@ class ShellTool{
         echo "\r\n";
     }
 
-    public function exec(array $rawArgs){
-        if(count($rawArgs) == 0){
+    public function exec(array $raw_args){
+        if(count($raw_args) == 0){
             return;
         }
         $args = array_map(
             function($r){return $this->clean_arg($r);},
-            $rawArgs
+            $raw_args
         );
         switch ($args[0]) {
             case 'mk-controller':

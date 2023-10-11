@@ -51,7 +51,7 @@ class HttpCompiledPath extends SarkontrollerRequest{
             );
         }
 
-        parent::__construct($controller_index, $method->methodName, $args);
+        parent::__construct($controller_index, $method->method_name, $args);
     }
 
 

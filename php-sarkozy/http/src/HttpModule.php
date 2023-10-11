@@ -44,13 +44,13 @@ final class HttpModule{
         /**
          * 
          */
-        $routerModule = array_key_exists(SarkozyModule::ROUTING_MODULE, $modules) ?
+        $router_module = array_key_exists(SarkozyModule::ROUTING_MODULE, $modules) ?
         $modules[SarkozyModule::ROUTING_MODULE] : null;
 
-        if ($routerModule == null){
+        if ($router_module == null){
             $this->router = new HttpDefaultRouter();
         }else{
-            $this->router = $routerModule->create_router($this->controllers);
+            $this->router = $router_module->create_router($this->controllers);
         }
 
         $this->parser = new HttpParser($this->template_module);
@@ -84,7 +84,7 @@ final class HttpModule{
         $this->check_request($request);
         $path = $request->get_uri();
         return $this->router->get_call($path, HttpMethodUtils::parse_method($request->get_method()));
-        //TODO @josse.de-oliveira routing with $this->controllers[$skReq->controllerIndex];
+        //TODO @josse.de-oliveira routing with $this->controllers[$sk_req->controller_index];
     }
 
 

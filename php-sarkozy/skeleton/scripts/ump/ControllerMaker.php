@@ -24,7 +24,7 @@ class ControllerMaker{
 
         $args = "";
 
-        foreach ($methods as $methodName => $metamethod) {
+        foreach ($methods as $method_name => $metamethod) {
             if (isset($metamethod["route"])){
                 $path = str_replace('"', '\\"', $metamethod["route"]);
                 $psplit = explode('?', $path, 2);
@@ -62,19 +62,19 @@ class ControllerMaker{
                 $has_path = true;
             }
 
-            $content.= "  public function $methodName($args){\r\n    return '';\r\n  }\r\n"; 
+            $content.= "  public function $method_name($args){\r\n    return '';\r\n  }\r\n"; 
         }
 
-        $additionalImports="";
+        $additional_imports="";
         if($has_path){
-            $additionalImports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpPath;\r\n";
+            $additional_imports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpPath;\r\n";
         }
         if($has_inpath){
-            $additionalImports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpInPath;\r\n";
+            $additional_imports .= "use PhpSarkozy\\HttpRouting\\attributes\\HttpInPath;\r\n";
         }
 
 
-        return ControllerMaker::CONTENT_HEADER.$additionalImports."#[Sarkontroller]\r\nclass $name{\r\n$content\r\n}".ControllerMaker::CONTENT_FOOTER;
+        return ControllerMaker::CONTENT_HEADER.$additional_imports."#[Sarkontroller]\r\nclass $name{\r\n$content\r\n}".ControllerMaker::CONTENT_FOOTER;
     }
 
     static private function check_and_get_file($name){
@@ -94,7 +94,7 @@ class ControllerMaker{
             throw new Exception("Usage: $args[0] [options] <controller-name>");
         }
 
-        $methodFlag = 0;
+        $method_flag = 0;
         $route_flag= 0;
 
         $methods = array();
@@ -106,7 +106,7 @@ class ControllerMaker{
                 foreach(str_split(substr($a, 1)) as $c){
                     switch($c){
                         case 'm':
-                            $methodFlag = 1;
+                            $method_flag = 1;
                             break;
                         case 'r':
                             $route_flag=1;
@@ -116,9 +116,9 @@ class ControllerMaker{
                     }
                 }
             }else{
-                if($methodFlag){
+                if($method_flag){
                     $methods[$a] = array();
-                    $methodFlag = 0;
+                    $method_flag = 0;
                     $last_method = $a;
                 }else if($route_flag && $last_method == null){
                     throw new Exception("You should use 'r' flag with 'm'");
@@ -135,7 +135,7 @@ class ControllerMaker{
             }
         }
 
-        if ($methodFlag || $route_flag){
+        if ($method_flag || $route_flag){
             throw new Exception("Incomplete flag");
         }
 
@@ -159,18 +159,18 @@ class ControllerMaker{
 
     static function make_controller($args){
 
-        $parsedArgs = ControllerMaker::parse_args($args);
+        $parsed_args = ControllerMaker::parse_args($args);
 
-        $name = $parsedArgs['name'];
+        $name = $parsed_args['name'];
         $file=ControllerMaker::check_and_get_file($name);
-        ControllerMaker::check_methods($parsedArgs['methods']);
+        ControllerMaker::check_methods($parsed_args['methods']);
 
         if(file_exists($file)){
             throw new Exception("Can't create controller: $name.php already exists");
             return;
         }
 
-        $content = ControllerMaker::get_content($name, $parsedArgs['methods']);
+        $content = ControllerMaker::get_content($name, $parsed_args['methods']);
         
         if( ($fd = fopen($file, 'w')) == false){
             throw new Exception("Can't create controller: Could not create $name.php");
