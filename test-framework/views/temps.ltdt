@@ -10,6 +10,9 @@
     </header>
     <main>
         <p>{{ contenu }}</p>
+        {{ .if has_warn }}
+            <p><strong>ATTENTION!!</strong></p>
+        {{ .end }}
     </main>
     <footer>
         <p>Copyright &copy; 2023 Le Temps des Templates par PHP Sarkozy/p>
