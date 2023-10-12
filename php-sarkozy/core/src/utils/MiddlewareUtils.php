@@ -14,23 +14,23 @@ final class MiddlewareUtils
     
  
     public static function get_all_middlewares(): array{
-        $reflectionMiddleware = array();
+        $reflection_middleware = array();
         foreach( get_declared_classes() as $class){
-            $reflectionClass = new \ReflectionClass($class);
-            if ( $attributes = $reflectionClass->getAttributes(Middleware::class, \ReflectionAttribute::IS_INSTANCEOF)){
+            $reflection_class = new \ReflectionClass($class);
+            if ( $attributes = $reflection_class->getAttributes(Middleware::class, \ReflectionAttribute::IS_INSTANCEOF)){
                 if(count($attributes) == 1){
                     if($priority = $attributes[0]->getArguments()[0]){
-                        $obj = ["priority"=>$priority,"reflection_class"=>$reflectionClass, "interfacesNames" => $reflectionClass->getInterfaceNames()];
+                        $obj = ["priority"=>$priority,"reflection_class"=>$reflection_class, "interfacesNames" => $reflection_class->getInterfaceNames()];
                     }else{
-                        $obj = ["priority"=> 1,"reflection_class"=>$reflectionClass, "interfacesNames" => $reflectionClass->getInterfaceNames()];
+                        $obj = ["priority"=> 1,"reflection_class"=>$reflection_class, "interfacesNames" => $reflection_class->getInterfaceNames()];
                     }
                     
-                    $reflectionMiddleware[] = $obj;
+                    $reflection_middleware[] = $obj;
                 }
             }
         }
 
-        return $reflectionMiddleware;
+        return $reflection_middleware;
     }
 
     public static function intercept_request(Request $request, $modules){
