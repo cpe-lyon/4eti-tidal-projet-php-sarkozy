@@ -1,24 +1,33 @@
 <?php
 namespace PhpSarkozy\Http;
 
+use HttpTemplateModuleInterface;
 use PhpSarkozy\core\api\Request;
 use PhpSarkozy\core\attributes\SarkozyModule;
 use PhpSarkozy\Http\api\HttpResponse;
-use PhpSarkozy\core\api\SarkoView as SarkoView;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\api\HttpRequest;
 use PhpSarkozy\Http\attributes\HttpEnforceHeader;
+use PhpSarkozy\Http\models\HttpControllerMethodRecord;
 use PhpSarkozy\Http\models\HttpControllerRecord;
+use PhpSarkozy\Http\models\HttpRouterInterface;
+use PhpSarkozy\Http\models\HttpSarkontrollerRequest;
 use PhpSarkozy\Http\utils\HttpAttributesUtils;
+use PhpSarkozy\Http\utils\HttpMethodsEnum;
+use PhpSarkozy\Http\utils\HttpMethodUtils;
 
 #[SarkozyModule(SarkozyModule::PROTOCOL_MODULE)]
 final class HttpModule{
 
     final const NAME = "HTTP-MODULE";
-
+    /**
+     * @var HttpTemplateModuleInterface
+     */
     private $template_module;
 
     private HttpParser $parser;
+
+    private HttpRouterInterface $router;
 
     /**
      * @var HttpControllerRecord[]
@@ -34,6 +43,18 @@ final class HttpModule{
             fn($c) => new HttpControllerRecord($c),
             $controllers
         ); 
+
+        /**
+         * 
+         */
+        $router_module = array_key_exists(SarkozyModule::ROUTING_MODULE, $modules) ?
+        $modules[SarkozyModule::ROUTING_MODULE] : null;
+
+        if ($router_module == null){
+            $this->router = new HttpDefaultRouter();
+        }else{
+            $this->router = $router_module->create_router($this->controllers);
+        }
 
         $this->parser = new HttpParser($this->template_module);
 
@@ -61,12 +82,39 @@ final class HttpModule{
         }
     }
 
+
+    private function get_default_args(HttpRequest $request){
+        $method = HttpMethodUtils::parse_method($request->get_method());
+        if (!HttpMethodUtils::has_body($method)){
+            return array();
+        }
+        $args = array();
+        $body = $request->get_body();
+        $headers = $request->get_headers();
+        $ctype = isset($headers['Content-Type']) ? $headers['Content-Type'] : 'text/plain';
+        switch ($ctype) {
+            case 'application/x-www-form-urlencoded':
+                parse_str($body, $args);
+                break;
+            case 'application/json':
+                $args = json_decode($body, flags:JSON_OBJECT_AS_ARRAY);
+                break;
+            default:
+                $args = array("body" => $body);
+                break;
+        }
+        return $args;
+    }
+
     public function get_call(HttpRequest $request):SarkontrollerRequest
     {
         $this->check_request($request);
         $path = $request->get_uri();
-        return HttpDefaultRouter::get_call($path);
-        //TODO @josse.de-oliveira routing with $this->controllers[$skReq->controllerIndex];
+        return $this->router->get_call(
+            $path,
+            HttpMethodUtils::parse_method($request->get_method()),
+            $this->get_default_args($request)
+        );
     }
 
 

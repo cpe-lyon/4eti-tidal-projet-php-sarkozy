@@ -62,7 +62,7 @@ class HttpParser{
         // Read Headers
         $headers = [];
         while ($header = trim(fgets($client))) {
-            list($name, $value) = explode(':', $header, 2);
+            list($name, $value) = preg_split('/:\s+/', $header, 2);
             $headers[$name] = $value;
         }
     

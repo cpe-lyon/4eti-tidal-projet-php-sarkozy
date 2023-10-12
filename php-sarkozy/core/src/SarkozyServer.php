@@ -17,7 +17,7 @@ class SarkozyServer
     /**
      * @var \ReflectionClass[]
      */
-    private array $moduleClasses;
+    private array $module_classes;
 
     private array $modules = array();
 
@@ -26,14 +26,14 @@ class SarkozyServer
     private $host = 'localhost';
 
     private $protocol = 'tcp';
-    private ?string $viewsPath;
+    private ?string $views_path;
 
-    function __construct(int $port = 2007, string $viewsPath = null)
+    function __construct(int $port = 2007, string $views_path = null)
     {
         $this->port = $port;
-        $this->viewsPath = $viewsPath;
-        if($viewsPath === null){
-            $this->viewsPath = getcwd()."/views";
+        $this->views_path = $views_path;
+        if($views_path === null){
+            $this->views_path = getcwd()."/views";
         }
     }
 
@@ -45,7 +45,7 @@ class SarkozyServer
     public function run()
     {
         $this->controllers = utils\ControllerUtils::get_all_controllers();
-        $this->moduleClasses = utils\ModuleUtils::get_all_modules();
+        $this->module_classes = utils\ModuleUtils::get_all_modules();
         $this->init_modules();
         echo "Modules initialized\r\n";
         utils\LogUtils::echo_welcome($this->get_welcome_url());
@@ -53,9 +53,9 @@ class SarkozyServer
     }
 
     private function get_welcome_url(){
-        $protocolClass = $this->moduleClasses[SarkozyModule::PROTOCOL_MODULE];
+        $protocol_class = $this->module_classes[SarkozyModule::PROTOCOL_MODULE];
         $protocol = $this->protocol;
-        if ($protocolClass->hasMethod("get_protocol")){
+        if ($protocol_class->hasMethod("get_protocol")){
             $protocol = $this->modules[SarkozyModule::PROTOCOL_MODULE]->get_protocol();
         }
         return "$protocol://$this->host:$this->port";
@@ -65,21 +65,23 @@ class SarkozyServer
     //TODO @josse.de-oliveira: check modules definition
     private function init_modules()
     {
-        $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->viewsPath]);
+        $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->views_path]);
+
+        $this->init_single_module(SarkozyModule::ROUTING_MODULE, []);
 
         //Protocol Module
         $this->init_single_module(SarkozyModule::PROTOCOL_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
 
-        ModuleUtils::check_modules($this->moduleClasses);
+        ModuleUtils::check_modules($this->module_classes);
     }
 
     private function init_single_module(int $module_flag, array $args){
-        if( !key_exists($module_flag, $this->moduleClasses) ){
+        if( !key_exists($module_flag, $this->module_classes) ){
             $this->modules[$module_flag] = null;
             return;
         }
-        $protocolModuleClass = $this->moduleClasses[$module_flag];
-        $this->modules[$module_flag] = $protocolModuleClass
+        $protocol_module_class = $this->module_classes[$module_flag];
+        $this->modules[$module_flag] = $protocol_module_class
             ->newInstance(...$args);
     }
 
@@ -91,17 +93,17 @@ class SarkozyServer
         $request->call = $call;
 
         $called_controller = $this->controllers[
-            $call->controllerIndex
+            $call->controller_index
         ];
 
-        if(!$called_controller->hasMethod($call->controllerMethod)){
+        if(!$called_controller->hasMethod($call->controller_method)){
             $error_message = "A problem occurred during controller method resolution";
             echo $error_message."\n";
             throw new \Exception($error_message);
         }
 
         $controller_instance = $called_controller->newInstance();
-        $controller_method = $called_controller->getMethod($call->controllerMethod);
+        $controller_method = $called_controller->getMethod($call->controller_method);
         return $controller_method->invokeArgs($controller_instance, $call->args);
     }
 
@@ -112,6 +114,12 @@ class SarkozyServer
         if (!$server) {
             die("Runtime error : server failed to start $errstr ($errno)\n");
         }
+
+        pcntl_signal(SIGINT, function () use ($server) {
+            fclose($server);
+            echo "Serveur arrêté.\n";
+            exit();
+        });
         
         while ($client = stream_socket_accept($server, -1)) {
             /**
@@ -120,13 +128,13 @@ class SarkozyServer
             $request = $protocol_module->get_request($client);
 
             try{
-                $controllerReturn = $this->get_return_value($request);
+                $controller_return = $this->get_return_value($request);
             }catch(\Exception $e){
-                $controllerReturn = $e;
+                $controller_return = $e;
             }
 
             try{
-                $request = $protocol_module->handle_response($request, $controllerReturn);
+                $request = $protocol_module->handle_response($request, $controller_return);
             }catch(\Exception $e){
                 $request = $protocol_module->handle_response($request, $e);
             }

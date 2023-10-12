@@ -7,7 +7,7 @@ use ReflectionMethod;
 
 class HttpControllerRecord{
 
-    public string $className;
+    public string $class_name;
 
     /**
      * @var HttpAttributeInterface[]
@@ -30,13 +30,13 @@ class HttpControllerRecord{
 
 
     public function __construct(\ReflectionClass $class){
-        $this->className = $class->getName();
-        $attrClasses = $class->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
-        $this->attributes = array_map( fn($a) => $this->instanciate($a) , $attrClasses);
-        $rawMethods = $class->getMethods( ReflectionMethod::IS_PUBLIC );
+        $this->class_name = $class->getName();
+        $attr_classes = $class->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
+        $this->attributes = array_map( fn($a) => $this->instanciate($a) , $attr_classes);
+        $raw_methods = $class->getMethods( ReflectionMethod::IS_PUBLIC );
         $this->methods = array_combine(
-            array_map(fn($m)=>$m->getName(), $rawMethods),
-            array_map(fn($m)=> new HttpControllerMethodRecord($m), $rawMethods),
+            array_map(fn($m)=>$m->getName(), $raw_methods),
+            array_map(fn($m)=> new HttpControllerMethodRecord($m), $raw_methods),
         );
     }
 

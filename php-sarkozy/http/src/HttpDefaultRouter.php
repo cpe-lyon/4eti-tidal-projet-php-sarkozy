@@ -2,24 +2,29 @@
 
 namespace PhpSarkozy\Http;
 
+use HttpRouter;
+use HttpRouterInterface;
 use PhpSarkozy\core\api\SarkontrollerRequest;
+use PhpSarkozy\Http\models\HttpRouterInterface as ModelsHttpRouterInterface;
+use PhpSarkozy\Http\models\HttpSarkontrollerRequest;
+use PhpSarkozy\Http\utils\HttpMethodsEnum;
 
 /**
  * A router with very limited features for tests while RouterModule is not activated
  */
-class HttpDefaultRouter{
+class HttpDefaultRouter implements ModelsHttpRouterInterface{
     
-    public static function get_call(string $path): SarkontrollerRequest{
+    public function get_call(string $path, HttpMethodsEnum $method, array $default_args=array()): SarkontrollerRequest{
         
         $path_parts = preg_split("/\?/", preg_replace('/[\/\.]/', "", $path), 1);
-        $cleanPath = $path_parts[0];
-        $rawArgs = count($path_parts) > 1 ? $path_parts[1]: null;
-        $args = array();
-        if ($rawArgs != null){
-            parse_str($rawArgs, $args);
+        $clean_path = $path_parts[0];
+        $raw_args = count($path_parts) > 1 ? $path_parts[1]: null;
+        $args = $default_args;
+        if ($raw_args != null){
+            parse_str($raw_args, $args);
         }
-        echo $cleanPath;
-        return new SarkontrollerRequest(0, $cleanPath, $args);
+        echo $clean_path;
+        return new SarkontrollerRequest(0, $clean_path, $args);
 
     }
 

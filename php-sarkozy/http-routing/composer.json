@@ -1,6 +1,7 @@
 {
-    "name": "php-sarkozy/http",
-    "description": "Le module http pour php-sarkozy",
+    "name": "php-sarkozy/http-routing",
+    "description": "Routing submodule for PHP Sarkozy Http Module",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
@@ -16,23 +17,27 @@
             "email": "josse.de-oliveira@cpe.fr"
         }
     ],
-    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PhpSarkozy\\Http\\": "src/",
-            "PhpSarkozy\\Http\\api\\": "src/api/",
-            "PhpSarkozy\\Http\\attributes\\":"src/attributes/",
-            "PhpSarkozy\\Http\\utils\\":"src/utils/",
-            "PhpSarkozy\\Http\\models\\":"src/models/"
+            "PhpSarkozy\\HttpRouting\\": "src/",
+            "PhpSarkozy\\HttpRouting\\attributes\\": "src/attributes/"
         }
     },
     "require": {
-        "php-sarkozy/core": "@dev"
+        "php-sarkozy/core": "@dev",
+        "php-sarkozy/http": "@dev"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../core",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../http",
             "options": {
                 "symlink": true
             }
