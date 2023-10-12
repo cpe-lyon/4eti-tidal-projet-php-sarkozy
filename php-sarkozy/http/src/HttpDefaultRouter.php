@@ -18,7 +18,6 @@ class HttpDefaultRouter{
         if ($rawArgs != null){
             parse_str($rawArgs, $args);
         }
-        echo $cleanPath;
         return new SarkontrollerRequest(0, $cleanPath, $args);
 
     }

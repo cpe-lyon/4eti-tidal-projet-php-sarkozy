@@ -2,16 +2,22 @@
 
 require_once 'vendor/autoload.php';
 
+use PhpSarkozy\core\api\Request;
+use PhpSarkozy\core\api\Response;
 use PhpSarkozy\core\api\SarkoView;
 use PhpSarkozy\core\SarkozyServer;
 use PhpSarkozy\core\attributes\Sarkontroller;
+use PhpSarkozy\core\attributes\Middleware;
 use PhpSarkozy\Http\attributes\HttpEnforceHeader;
 use PhpSarkozy\Http\attributes\HttpProduces;
+use PhpSarkozy\Middleware\api\MiddlewareInterface;
 
 use PhpSarkozy\Http\HttpModule;
 echo "Enabled ". HttpModule::NAME . "\n";
 use PhpSarkozy\LeTempsDesTemplates\LeTempsDesTemplatesModule;
 echo "Enabling ".LeTempsDesTemplatesModule::MODULE_NAME."\n";
+use PhpSarkozy\Middleware\MiddlewareModule;
+echo "Enabled ". MiddlewareModule::NAME . "\n";
 
 echo "Starting PHP Sarkozy...\n";
 
@@ -63,6 +69,32 @@ class MonController{
 
     public function string(){
         return "test string";
+    }
+}
+
+#[Middleware(2)]
+class MonMiddleware1 implements MiddlewareInterface{
+
+    function intercept_request(Request $request): Request{
+        echo "intercept_request2\n";
+        return $request;
+    }
+
+    function intercept_response(Response $response): Response{
+        echo "intercept_response2\n";
+        return $response;
+    }
+}
+
+#[Middleware(1)]
+class MonMiddleware2 implements MiddlewareInterface{
+    function intercept_request(Request $request): Request{
+        echo "intercept_request1\n";
+        return $request;
+    }
+    function intercept_response(Response $response): Response{
+        echo "intercept_response1\n";
+        return $response;
     }
 }
 

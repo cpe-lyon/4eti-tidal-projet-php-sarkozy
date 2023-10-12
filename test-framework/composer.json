@@ -12,7 +12,8 @@
     "require": {
         "php-sarkozy/core": "@dev",
         "php-sarkozy/le-temps-des-templates": "@dev",
-        "php-sarkozy/http": "@dev"
+        "php-sarkozy/http": "@dev",
+        "php-sarkozy/middleware": "@dev"
     },
     "repositories": [
         {
@@ -32,6 +33,13 @@
         {
             "type": "path",
             "url": "../php-sarkozy/http",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../php-sarkozy/middleware",
             "options": {
                 "symlink": true
             }

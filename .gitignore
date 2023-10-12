@@ -2,5 +2,7 @@
 /test-framework/vendor/
 /php-sarkozy/http/vendor/
 /php-sarkozy/skeleton/vendor/
+/php-sarkozy/le-temps-des-templates/vendor
+/php-sarkozy/middleware/vendor
 /.vscode
 /index.html
