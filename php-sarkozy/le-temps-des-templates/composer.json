@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "PhpSarkozy\\LeTempsDesTemplates\\": "src/",
-            "PhpSarkozy\\LeTempsDesTemplates\\Elements\\": "src/elements/"
+            "PhpSarkozy\\LeTempsDesTemplates\\elements\\": "src/elements/"
         }
     },
     "authors": [

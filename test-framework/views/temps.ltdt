@@ -10,7 +10,7 @@
     </header>
     <main>
         <p>{{ contenu }}</p>
-        {{ .if has_warn }}
+        {{ .if }}
             <p><strong>ATTENTION!!</strong></p>
         {{ .end }}
     </main>

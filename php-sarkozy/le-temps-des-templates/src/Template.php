@@ -2,11 +2,16 @@
 
 namespace PhpSarkozy\LeTempsDesTemplates\;
 
+use PhpSarkozy\LeTempsDesTemplates\TemplateInstructionEnum;
+use PhpSarkozy\LeTempsDesTemplates\elements\ContentElement;
+
+
 class Template{
 
     private $variables = array();
     private $file;
     const REGEX = '/\{\{((?:[^}]+|\}[^}])*)\}\}/';
+    const INSTRUCTION_REGEX = '/\s*\.([^\s]+)\s*(.*)\s*$/';
 
     function __construct($file){
         $this->file = $file;
@@ -27,11 +32,8 @@ class Template{
             // Les index impaires sont les str à remplacer, fonction process qui rend un tableau processed puis fonction join qui renvoi l'html
             $splitted_content = preg_split(Template::REGEX, $content, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-            $computed_content = $this->process($splitted_content);
-            /*
-            foreach ($this->variables as $variable => $value) {
-                $content = str_replace("{{ $variable }}", $value, $content);
-            }*/
+            $content_element = new ContentElement($splitted_content);
+            $computed_content = $content_element->process($this->variables);
             
             return $computed_content;
         } else {
@@ -40,17 +42,6 @@ class Template{
     }
 
 
-    public function process($splitted_array): string{
-
-        // Créé l'arbre du template
-        for($i = 1; $i < count($splitted_array); $i+=2){
-            if(preg_replace('/\s+/', '', $splitted_array[$i]) == "if") {
-                echo "trouvé";
-            }
-        }
-
-        return implode($splitted_array);
-    }
 }
 
 ?>
