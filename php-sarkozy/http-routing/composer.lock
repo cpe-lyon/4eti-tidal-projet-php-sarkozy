@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fcaf69fd7f306ee3cdbd783f7ccac96",
+    "content-hash": "2688ed7e12e7ff06b089f4aedcd82642",
     "packages": [
         {
             "name": "php-sarkozy/core",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/core",
-                "reference": "370dcaaf00d58cd7c7257ebb65ef359a4a08373a"
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
             },
             "type": "library",
             "autoload": {
@@ -44,7 +44,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/http",
-                "reference": "174bbb2d42e86be9c20dd185db13b4cd885b45f4"
+                "reference": "8745cd531ea5ff91c02dbe596cda5aaeb8b1f43c"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -80,7 +80,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-sarkozy/le-temps-des-templates",
-                "reference": "9c2f2015861155cb3ca165f0ff55f901251f2cae"
+                "reference": "c9bd8f34b93d3be88c42d7f1fcb19dfaa0e7ef3b"
             },
             "type": "library",
             "autoload": {
@@ -102,40 +102,6 @@
                 "symlink": true,
                 "relative": true
             }
-        },
-        {
-            "name": "php-sarkozy/middleware",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../php-sarkozy/middleware",
-                "reference": "394dbc1c17560925a4a1f37a516e31db1155fdf5"
-            },
-            "require": {
-                "php-sarkozy/core": "@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpSarkozy\\Middleware\\": "src/",
-                    "PhpSarkozy\\Middleware\\api\\": "src/api/",
-                    "PhpSarkozy\\Middleware\\utils\\": "src/utils/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Theo CLERE",
-                    "email": "theo.clere@cpe.fr"
-                }
-            ],
-            "description": "Mieux vaut prévenir que guérir",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         }
     ],
     "packages-dev": [],
@@ -144,12 +110,11 @@
     "stability-flags": {
         "php-sarkozy/core": 20,
         "php-sarkozy/le-temps-des-templates": 20,
-        "php-sarkozy/http": 20,
-        "php-sarkozy/middleware": 20
+        "php-sarkozy/http": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

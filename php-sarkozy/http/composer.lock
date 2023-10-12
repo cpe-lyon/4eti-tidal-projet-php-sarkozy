@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-main",
+            "version": "dev-ump/added-route",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -30,6 +30,14 @@
                 {
                     "name": "Ruben CLERC",
                     "email": "ruben.clerc@cpe.fr"
+                },
+                {
+                    "name": "Theo CLERE",
+                    "email": "theo.clere@cpe.fr"
+                },
+                {
+                    "name": "Josse DE OLIVEIRA",
+                    "email": "josse.de-oliveira@cpe.fr"
                 }
             ],
             "description": "Un framework simple pour le cours TIDAL",

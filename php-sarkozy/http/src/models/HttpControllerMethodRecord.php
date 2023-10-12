@@ -6,7 +6,7 @@ use PhpSarkozy\Http\attributes\HttpAttributeInterface;
 
 class HttpControllerMethodRecord{
 
-    public string $methodName;
+    public string $method_name;
 
     /**
      * @var HttpAttributeInterface[]
@@ -15,7 +15,7 @@ class HttpControllerMethodRecord{
 
 
     /**
-     * @var array<string,HttpAttributeInterface>
+     * @var array(string,HttpAttributeInterface[], boolean)
      */
     public array $params;
 
@@ -28,16 +28,16 @@ class HttpControllerMethodRecord{
     }
 
     private function parseParams(\ReflectionParameter $param){
-        $name =  $param->getName().($param->isOptional()?'?':'');
-        $attrClasses = $param->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
-        $value = array_map( fn($a) => $this->instanciate($a) , $attrClasses);
-        return [ $name => $value ];
+        $name =  $param->getName();
+        $attr_classes = $param->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
+        $attrs = array_map( fn($a) => $this->instanciate($a) , $attr_classes);
+        return [ $name, $attrs, $param->isOptional() ];
     }
 
     public function __construct(\ReflectionMethod $method){
-        $this->methodName = $method->getName();
-        $attrClasses = $method->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
-        $this->attributes = array_map( fn($a) => $this->instanciate($a) , $attrClasses);
+        $this->method_name = $method->getName();
+        $attr_classes = $method->getAttributes(HttpAttributeInterface::class, \ReflectionAttribute::IS_INSTANCEOF);
+        $this->attributes = array_map( fn($a) => $this->instanciate($a) , $attr_classes);
         $this->params = array_map( fn($p) => $this->parseParams($p), $method->getParameters());
     }
 

@@ -23,11 +23,11 @@ final class HttpAttributesUtils
         if ($call == null){
             throw new Exception("Controller request is null", 500);
         }
-        $record = $records[$call->controllerIndex] ?? null;
+        $record = $records[$call->controller_index] ?? null;
         if ($record == null){
             throw new Exception("Controller request method is null", 500);
         }
-        $method = $record->methods[$call->controllerMethod] ?? null;
+        $method = $record->methods[$call->controller_method] ?? null;
         if ($method == null){
             throw new Exception("Controller request method is null", 500);
         }
