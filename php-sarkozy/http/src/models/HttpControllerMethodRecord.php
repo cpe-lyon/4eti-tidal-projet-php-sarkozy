@@ -15,7 +15,7 @@ class HttpControllerMethodRecord{
 
 
     /**
-     * @var aray(string,HttpAttributeInterface, boolean)
+     * @var array(string,HttpAttributeInterface[], boolean)
      */
     public array $params;
 

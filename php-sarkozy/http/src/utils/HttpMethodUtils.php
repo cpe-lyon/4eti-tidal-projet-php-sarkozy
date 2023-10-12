@@ -16,4 +16,8 @@ final class HttpMethodUtils{
                 return HttpMethodsEnum::DELETE;
         }
     }
+
+    public static function has_body(HttpMethodsEnum $method){
+        return $method == HttpMethodsEnum::POST || $method == HttpMethodsEnum::PUT;
+    }
 }

@@ -8,9 +8,12 @@ use PhpSarkozy\Http\api\HttpResponse;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\api\HttpRequest;
 use PhpSarkozy\Http\attributes\HttpEnforceHeader;
+use PhpSarkozy\Http\models\HttpControllerMethodRecord;
 use PhpSarkozy\Http\models\HttpControllerRecord;
 use PhpSarkozy\Http\models\HttpRouterInterface;
+use PhpSarkozy\Http\models\HttpSarkontrollerRequest;
 use PhpSarkozy\Http\utils\HttpAttributesUtils;
+use PhpSarkozy\Http\utils\HttpMethodsEnum;
 use PhpSarkozy\Http\utils\HttpMethodUtils;
 
 #[SarkozyModule(SarkozyModule::PROTOCOL_MODULE)]
@@ -79,12 +82,39 @@ final class HttpModule{
         }
     }
 
+
+    private function get_default_args(HttpRequest $request){
+        $method = HttpMethodUtils::parse_method($request->get_method());
+        if (!HttpMethodUtils::has_body($method)){
+            return array();
+        }
+        $args = array();
+        $body = $request->get_body();
+        $headers = $request->get_headers();
+        $ctype = isset($headers['Content-Type']) ? $headers['Content-Type'] : 'text/plain';
+        switch ($ctype) {
+            case 'application/x-www-form-urlencoded':
+                parse_str($body, $args);
+                break;
+            case 'application/json':
+                $args = json_decode($body, flags:JSON_OBJECT_AS_ARRAY);
+                break;
+            default:
+                $args = array("body" => $body);
+                break;
+        }
+        return $args;
+    }
+
     public function get_call(HttpRequest $request):SarkontrollerRequest
     {
         $this->check_request($request);
         $path = $request->get_uri();
-        return $this->router->get_call($path, HttpMethodUtils::parse_method($request->get_method()));
-        //TODO @josse.de-oliveira routing with $this->controllers[$sk_req->controller_index];
+        return $this->router->get_call(
+            $path,
+            HttpMethodUtils::parse_method($request->get_method()),
+            $this->get_default_args($request)
+        );
     }
 
 
