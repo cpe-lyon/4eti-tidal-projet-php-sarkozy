@@ -13,6 +13,8 @@ class Request {
     
     private Response $response;
 
+    public ?SarkontrollerRequest $call = null;
+
     public function __construct($client, array $metadata) {
         $this->client = $client;
         $this->metadata = $metadata;
@@ -27,7 +29,7 @@ class Request {
     }
 
     function get_response(){
-        return $this->response;
+        return isset($this->response) ? $this->response : null;
     }
 
     function set_response(Response $response){

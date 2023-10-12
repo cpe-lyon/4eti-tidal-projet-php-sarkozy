@@ -14,6 +14,13 @@ class HttpResponse extends Response{
         ));
     }
 
+    public static function createOK(string $body) : HttpResponse{
+        $res = new HttpResponse($body);
+        $res->set_code(200);
+        $res->set_content_length(strlen($body));
+        return $res;
+    }
+
 
     public function set_code($code){
         $this->set_header("HTTP", $code);
