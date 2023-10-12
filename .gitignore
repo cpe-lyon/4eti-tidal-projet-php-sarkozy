@@ -3,6 +3,8 @@
 /php-sarkozy/http/vendor/
 /php-sarkozy/http-routing/vendor/
 /php-sarkozy/skeleton/vendor/
+/php-sarkozy/le-temps-des-templates/vendor
+/php-sarkozy/middleware/vendor
 /php-sarkozy/skeleton/src/controllers/
 /.vscode
 /index.html

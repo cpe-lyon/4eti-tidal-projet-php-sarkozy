@@ -21,6 +21,8 @@ class SarkozyServer
 
     private array $modules = array();
 
+    private array $middlewares = array();
+
     private int $port;
   
     private $host = 'localhost';
@@ -46,6 +48,8 @@ class SarkozyServer
     {
         $this->controllers = utils\ControllerUtils::get_all_controllers();
         $this->module_classes = utils\ModuleUtils::get_all_modules();
+        $this->middlewares = utils\MiddlewareUtils::get_all_middlewares();
+
         $this->init_modules();
         echo "Modules initialized\r\n";
         utils\LogUtils::echo_welcome($this->get_welcome_url());
@@ -62,7 +66,6 @@ class SarkozyServer
     }
 
 
-    //TODO @josse.de-oliveira: check modules definition
     private function init_modules()
     {
         $this->init_single_module(SarkozyModule::TEMPLATE_MODULE, ["path" => $this->views_path]);
@@ -71,6 +74,9 @@ class SarkozyServer
 
         //Protocol Module
         $this->init_single_module(SarkozyModule::PROTOCOL_MODULE, ["controllers" => $this->controllers, "modules" => $this->modules]);
+
+        //Middlewares 
+        $this->init_single_module(SarkozyModule::MIDDLEWARE_MODULE, ["middlewares" => $this->middlewares]);
 
         ModuleUtils::check_modules($this->module_classes);
     }
@@ -114,12 +120,6 @@ class SarkozyServer
         if (!$server) {
             die("Runtime error : server failed to start $errstr ($errno)\n");
         }
-
-        pcntl_signal(SIGINT, function () use ($server) {
-            fclose($server);
-            echo "Serveur arrêté.\n";
-            exit();
-        });
         
         while ($client = stream_socket_accept($server, -1)) {
             /**
@@ -127,6 +127,9 @@ class SarkozyServer
              */
             $request = $protocol_module->get_request($client);
 
+            // Request interception 
+            utils\MiddlewareUtils::intercept_request($request,$this->modules);
+            
             try{
                 $controller_return = $this->get_return_value($request);
             }catch(\Exception $e){
@@ -138,6 +141,9 @@ class SarkozyServer
             }catch(\Exception $e){
                 $request = $protocol_module->handle_response($request, $e);
             }
+
+            // Response interception 
+            utils\MiddlewareUtils::intercept_response($request,$this->modules);
 
             $raw_response = $protocol_module->get_raw_response($request);
             fwrite($client, $raw_response);

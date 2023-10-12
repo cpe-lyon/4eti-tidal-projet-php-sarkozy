@@ -1,0 +1,31 @@
+{
+    "name": "php-sarkozy/middleware",
+    "description": "Mieux vaut prévenir que guérir",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpSarkozy\\Middleware\\": "src/",
+            "PhpSarkozy\\Middleware\\api\\": "src/api/",
+            "PhpSarkozy\\Middleware\\utils\\":"src/utils/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Theo CLERE",
+            "email": "theo.clere@cpe.fr"
+        }
+    ],
+    "require": {
+        "php-sarkozy/core": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ] 
+}

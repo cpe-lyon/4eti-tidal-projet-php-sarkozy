@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e5c5567e869dd94039a923c53479602",
+    "content-hash": "e51cb5e95b7b0e3abc44d91bd8fe4eda",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-ump/added-route",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -30,14 +30,6 @@
                 {
                     "name": "Ruben CLERC",
                     "email": "ruben.clerc@cpe.fr"
-                },
-                {
-                    "name": "Theo CLERE",
-                    "email": "theo.clere@cpe.fr"
-                },
-                {
-                    "name": "Josse DE OLIVEIRA",
-                    "email": "josse.de-oliveira@cpe.fr"
                 }
             ],
             "description": "Un framework simple pour le cours TIDAL",

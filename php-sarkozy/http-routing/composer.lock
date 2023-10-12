@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "888f3b57d56b54009fa418da7481e458",
+    "content-hash": "2688ed7e12e7ff06b089f4aedcd82642",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-ump/added-route",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../core",
-                "reference": "403a1a900be97e16fb8c4614094bb386818b096f"
+                "url": "../php-sarkozy/core",
+                "reference": "a28a67d832d6860f49e91e48ab5384d699860775"
             },
             "type": "library",
             "autoload": {
@@ -30,14 +30,6 @@
                 {
                     "name": "Ruben CLERC",
                     "email": "ruben.clerc@cpe.fr"
-                },
-                {
-                    "name": "Theo CLERE",
-                    "email": "theo.clere@cpe.fr"
-                },
-                {
-                    "name": "Josse DE OLIVEIRA",
-                    "email": "josse.de-oliveira@cpe.fr"
                 }
             ],
             "description": "Un framework simple pour le cours TIDAL",
@@ -48,11 +40,11 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-ump/added-route",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../http",
-                "reference": "1a20c7f066432eb170f7f70f1eb6cb20088c2e1f"
+                "url": "../php-sarkozy/http",
+                "reference": "8745cd531ea5ff91c02dbe596cda5aaeb8b1f43c"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -72,19 +64,40 @@
             ],
             "authors": [
                 {
-                    "name": "Ruben CLERC",
-                    "email": "ruben.clerc@cpe.fr"
-                },
-                {
                     "name": "Theo CLERE",
                     "email": "theo.clere@cpe.fr"
-                },
+                }
+            ],
+            "description": "Le module http pour php-sarkozy",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "php-sarkozy/le-temps-des-templates",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../php-sarkozy/le-temps-des-templates",
+                "reference": "c9bd8f34b93d3be88c42d7f1fcb19dfaa0e7ef3b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
                 {
                     "name": "Josse DE OLIVEIRA",
                     "email": "josse.de-oliveira@cpe.fr"
                 }
             ],
-            "description": "Le module http pour php-sarkozy",
+            "description": "Moteur de templating du framework PHP Sarkozy",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -96,6 +109,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "php-sarkozy/core": 20,
+        "php-sarkozy/le-temps-des-templates": 20,
         "php-sarkozy/http": 20
     },
     "prefer-stable": false,

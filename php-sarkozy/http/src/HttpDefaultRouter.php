@@ -23,7 +23,6 @@ class HttpDefaultRouter implements ModelsHttpRouterInterface{
         if ($raw_args != null){
             parse_str($raw_args, $args);
         }
-        echo $clean_path;
         return new SarkontrollerRequest(0, $clean_path, $args);
 
     }

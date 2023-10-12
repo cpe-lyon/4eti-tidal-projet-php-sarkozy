@@ -7,7 +7,9 @@
         "php-sarkozy/core": "@dev",
         "php-sarkozy/http": "@dev",
         "php-sarkozy/http-routing": "@dev",
-        "php-sarkozy/le-temps-des-templates": "@dev"
+        "php-sarkozy/le-temps-des-templates": "@dev",
+        "php-sarkozy/middleware": "@dev"
+
     },
     "repositories": [
         {
@@ -34,6 +36,13 @@
         {
             "type": "path",
             "url": "../le-temps-des-templates",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../middleware",
             "options": {
                 "symlink": true
             }
