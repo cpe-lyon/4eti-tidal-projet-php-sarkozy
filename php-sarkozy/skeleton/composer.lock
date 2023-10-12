@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2cdd8aa115b31a0c5712a0ad548cd24",
+    "content-hash": "bad17243e169a411889746abbe25c78e",
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-routing/first-routing-fixes",
+            "version": "dev-middleware-module",
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "403a1a900be97e16fb8c4614094bb386818b096f"
+                "reference": "8bdbd2923015d7d200d82ae516a81b38e92792df"
             },
             "type": "library",
             "autoload": {
@@ -48,11 +48,11 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-routing/first-routing-fixes",
+            "version": "dev-middleware-module",
             "dist": {
                 "type": "path",
                 "url": "../http",
-                "reference": "1a20c7f066432eb170f7f70f1eb6cb20088c2e1f"
+                "reference": "3b8122e5128020d993eabfb0e3dc3a2c128c6b88"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -92,11 +92,11 @@
         },
         {
             "name": "php-sarkozy/http-routing",
-            "version": "dev-routing/first-routing-fixes",
+            "version": "dev-middleware-module",
             "dist": {
                 "type": "path",
                 "url": "../http-routing",
-                "reference": "4167dea885f69f9102d4b317134855bdacd4cedf"
+                "reference": "cf7e6546af63d2c432ba1f81ad07317420892120"
             },
             "require": {
                 "php-sarkozy/core": "@dev",
@@ -134,11 +134,11 @@
         },
         {
             "name": "php-sarkozy/le-temps-des-templates",
-            "version": "dev-routing/first-routing-fixes",
+            "version": "dev-middleware-module",
             "dist": {
                 "type": "path",
                 "url": "../le-temps-des-templates",
-                "reference": "0c0e8ebb776a0e9a24a3105041e805a17bb98081"
+                "reference": "ca2b06c29c412dd131b24fe714a979e2086dcade"
             },
             "type": "library",
             "autoload": {
@@ -168,6 +168,40 @@
                 "symlink": true,
                 "relative": true
             }
+        },
+        {
+            "name": "php-sarkozy/middleware",
+            "version": "dev-middleware-module",
+            "dist": {
+                "type": "path",
+                "url": "../middleware",
+                "reference": "394dbc1c17560925a4a1f37a516e31db1155fdf5"
+            },
+            "require": {
+                "php-sarkozy/core": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpSarkozy\\Middleware\\": "src/",
+                    "PhpSarkozy\\Middleware\\api\\": "src/api/",
+                    "PhpSarkozy\\Middleware\\utils\\": "src/utils/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Theo CLERE",
+                    "email": "theo.clere@cpe.fr"
+                }
+            ],
+            "description": "Mieux vaut prévenir que guérir",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         }
     ],
     "packages-dev": [],
@@ -177,11 +211,12 @@
         "php-sarkozy/core": 20,
         "php-sarkozy/http": 20,
         "php-sarkozy/http-routing": 20,
-        "php-sarkozy/le-temps-des-templates": 20
+        "php-sarkozy/le-temps-des-templates": 20,
+        "php-sarkozy/middleware": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

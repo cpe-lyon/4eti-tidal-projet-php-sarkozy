@@ -47,7 +47,7 @@ class SarkozyServer
     public function run()
     {
         $this->controllers = utils\ControllerUtils::get_all_controllers();
-        $this->moduleClasses = utils\ModuleUtils::get_all_modules();
+        $this->module_classes = utils\ModuleUtils::get_all_modules();
         $this->middlewares = utils\MiddlewareUtils::get_all_middlewares();
 
         $this->init_modules();
@@ -120,12 +120,6 @@ class SarkozyServer
         if (!$server) {
             die("Runtime error : server failed to start $errstr ($errno)\n");
         }
-
-        pcntl_signal(SIGINT, function () use ($server) {
-            fclose($server);
-            echo "Serveur arrêté.\n";
-            exit();
-        });
         
         while ($client = stream_socket_accept($server, -1)) {
             /**
