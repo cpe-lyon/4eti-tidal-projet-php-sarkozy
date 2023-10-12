@@ -7,7 +7,9 @@ use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\models\HttpControllerMethodRecord;
 use PhpSarkozy\Http\models\HttpControllerRecord;
 use PhpSarkozy\Http\models\HttpRouterInterface;
+use PhpSarkozy\Http\models\HttpSarkontrollerRequest;
 use PhpSarkozy\Http\utils\HttpMethodsEnum;
+use PhpSarkozy\Http\utils\HttpMethodUtils;
 use PhpSarkozy\HttpRouting\attributes\HttpPath;
 
 class HttpRouter implements HttpRouterInterface{
@@ -66,15 +68,18 @@ class HttpRouter implements HttpRouterInterface{
     
     }
 
-    function get_call(string $path,  HttpMethodsEnum $method): SarkontrollerRequest{
+    function get_call(string $path, HttpMethodsEnum $method, array $default_args=array()): HttpSarkontrollerRequest{
         
         $sk_request = null;
         $iter = new \ArrayIterator($this->path_compilers[$method->value]);
 
         $raw_path = parse_url($path, PHP_URL_PATH);
-        $req_args = array();
-        $req_query = parse_url($path, PHP_URL_QUERY);
-        parse_str($req_query, $req_args);
+        $req_args = $default_args;
+        
+        if (!HttpMethodUtils::has_body($method)){
+            $req_query = parse_url($path, PHP_URL_QUERY);
+            parse_str($req_query, $req_args);
+        }
 
         while($sk_request == null && $iter->valid()){
             $sk_request = $iter->current()->compile($raw_path, $req_args);

@@ -5,11 +5,10 @@ namespace PhpSarkozy\HttpRouting;
 use Exception;
 use PhpSarkozy\core\api\SarkontrollerRequest;
 use PhpSarkozy\Http\models\HttpControllerMethodRecord;
+use PhpSarkozy\Http\models\HttpSarkontrollerRequest;
 use PhpSarkozy\HttpRouting\attributes\HttpInPath;
 
-class HttpCompiledPath extends SarkontrollerRequest{
-
-
+class HttpCompiledPath extends HttpSarkontrollerRequest{
 
     private function parse_param(string $pname, array $pattrs, bool $optional, array $path_matches, array $request_args , array &$target){
         $in_path_arr = array_filter( 
@@ -51,7 +50,7 @@ class HttpCompiledPath extends SarkontrollerRequest{
             );
         }
 
-        parent::__construct($controller_index, $method->method_name, $args);
+        parent::__construct($controller_index, $method, $args);
     }
 
 
