@@ -7,13 +7,7 @@ class ConditionalElement implements TemplateElement {
 
     private TemplateElement $element_yes;
     private ?TemplateElement $element_no= null;
-    
-    private string $condition = False;
-
-
-    function parse_elements(array &$src){
-        for ($idx=0; $src[$idx])
-    }
+    private string $condition = "false";
 
     function __construct(string $condition, array &$array){
         $this->condition = $condition;
@@ -21,12 +15,13 @@ class ConditionalElement implements TemplateElement {
         $this->element_yes = new ContentElement($array, $last_el);
         
         if ($last_el instanceof ElseElement){
+            $last_el = null;
             $this->element_no = new ContentElement($array, $last_el);
             if ($last_el == null || ! ($last_el instanceof EndElement)){
-                throw new Exception(".else could not match an .end");
+                throw new \Exception(".else could not match an .end");
             }
         }else if ( !($last_el instanceof EndElement)){
-            throw new Exception(".if could not match an .end");
+            throw new \Exception(".if could not match an .end");
         }
 
     }
@@ -39,7 +34,7 @@ class ConditionalElement implements TemplateElement {
             return $this->element_yes->process($variables);
         }
 
-        if ($element_no != null){
+        if ($this->element_no != null){
             return $this->element_no->process($variables);
         }
 

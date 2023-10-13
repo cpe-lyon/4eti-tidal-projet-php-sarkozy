@@ -8,13 +8,13 @@ class VariableElement implements TemplateElement {
     private string $str;
 
     function __construct(string $str){
-        $this->str = $str;
+        $this->str = preg_replace('/\\s+/', '', $str);
     }
 
     public function process(array $variables):string {
 
         if (!isset($variables[$this->str])){
-            throw new Exception("Variable not found: $this->str", 500);
+            throw new \Exception("Variable not found: `$this->str`", 500);
         }
 
         return strval($variables[$this->str]);

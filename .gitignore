@@ -4,5 +4,6 @@
 /php-sarkozy/http-routing/vendor/
 /php-sarkozy/skeleton/vendor/
 /php-sarkozy/skeleton/src/controllers/
+/php-sarkozy/skeleton/src/views/
 /.vscode
 /index.html

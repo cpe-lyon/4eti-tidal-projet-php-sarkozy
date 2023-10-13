@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PhpSarkozy\\LeTempsDesTemplates\\elements\\' => array($baseDir . '/src/elements'),
     'PhpSarkozy\\LeTempsDesTemplates\\' => array($baseDir . '/src'),
 );

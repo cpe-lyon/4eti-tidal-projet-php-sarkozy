@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpSarkozy\LeTempsDesTemplates\;
+namespace PhpSarkozy\LeTempsDesTemplates;
 
 use PhpSarkozy\LeTempsDesTemplates\TemplateInstructionEnum;
 use PhpSarkozy\LeTempsDesTemplates\elements\ContentElement;

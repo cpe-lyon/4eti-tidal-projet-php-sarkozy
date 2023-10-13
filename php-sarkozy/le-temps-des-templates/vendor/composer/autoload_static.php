@@ -9,11 +9,16 @@ class ComposerStaticInitd2e0d1cf2077ac62544e6c9abb8e61c9
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
+            'PhpSarkozy\\LeTempsDesTemplates\\elements\\' => 40,
             'PhpSarkozy\\LeTempsDesTemplates\\' => 31,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'PhpSarkozy\\LeTempsDesTemplates\\elements\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/elements',
+        ),
         'PhpSarkozy\\LeTempsDesTemplates\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

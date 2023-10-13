@@ -5,6 +5,8 @@ namespace PhpSarkozy\LeTempsDesTemplates\elements;
 use PhpSarkozy\LeTempsDesTemplates\elements\StaticElement;
 use PhpSarkozy\LeTempsDesTemplates\elements\VariableElement;
 use PhpSarkozy\LeTempsDesTemplates\elements\ConditionalElement;
+use PhpSarkozy\LeTempsDesTemplates\Template;
+use PhpSarkozy\LeTempsDesTemplates\TemplateInstructionEnum;
 
 class ContentElement implements TemplateElement {
     
@@ -12,7 +14,7 @@ class ContentElement implements TemplateElement {
     private array $template_elements;
 
     private static function is_end_element(TemplateElement $el){
-        return ($el instanceof ElseElement);
+        return ($el instanceof ElseElement || $el instanceof EndElement);
     }
 
     private function create_instruction_element(TemplateInstructionEnum $instruction, string $arg, array &$src){
@@ -21,6 +23,8 @@ class ContentElement implements TemplateElement {
                 return new Conditionalelement($arg, $src);
             case TemplateInstructionEnum::ELSE:
                 return new ElseElement();
+            case TemplateInstructionEnum::END:
+                return new EndElement();
         }
     }
 
@@ -29,7 +33,6 @@ class ContentElement implements TemplateElement {
 
         if ( ContentElement::is_end_element($element) ){
             $stop = true;
-            $src = array_slice($src, $idx+1);
         }
 
         return $element;
@@ -42,8 +45,8 @@ class ContentElement implements TemplateElement {
 
         $template_arr = array();
         $stop = false;
-        for ($idx=0; $stop || $idx<count($src); $idx++) {
-            $el = $src[$idx];
+        for ($idx=0; (!$stop) && 0<count($src); $idx++) {
+            $el = array_shift($src);
             if ($idx%2 == 0){
                 $template_arr[] = new StaticElement($el);
             }else{
@@ -64,7 +67,7 @@ class ContentElement implements TemplateElement {
                         throw new \Exception("Unknown instruction: $raw_instruction");
                     }
                     
-                    $template_arr[] = $this->create_instruction_element(
+                    $template_arr[] = $this->get_instruction(
                         $instruction, $instruction_match[2], $idx,
                         $src, $stop
                     );
@@ -89,7 +92,7 @@ class ContentElement implements TemplateElement {
     public function process(array $variables): string{
         return implode(
             array_map(
-                fn($el): $el->process($variables),
+                fn($el)=> $el->process($variables),
                 $this->template_elements
             )
         );
