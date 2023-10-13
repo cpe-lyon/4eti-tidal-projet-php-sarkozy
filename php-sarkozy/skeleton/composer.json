@@ -9,7 +9,6 @@
         "php-sarkozy/http-routing": "@dev",
         "php-sarkozy/le-temps-des-templates": "@dev",
         "php-sarkozy/middleware": "@dev"
-
     },
     "repositories": [
         {
@@ -53,13 +52,13 @@
             "Composer\\Config::disableProcessTimeout",
             "php ./src/config/runner/start-server.php"
         ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "php -dxdebug.remote_enable=1 -dxdebug.remote_mode=req -dxdebug.remote_host=127.0.0.1 -dxdebug.remote_port=9000 -dxdebug.remote_autostart=1"
-        ],
-        "ump": [
+        "ump-linux": [
             "Composer\\Config::disableProcessTimeout",
             "php ./scripts/ump/ump.php"
+        ],
+        "ump-win": [
+            "Composer\\Config::disableProcessTimeout",
+            "php .\\scripts\\ump\\ump.php < CON"
         ]
-    }    
+    }
 }

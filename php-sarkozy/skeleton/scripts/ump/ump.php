@@ -35,7 +35,12 @@ class ShellTool{
     }
 
     public function ask():string{
-        $inp = readline(" > ");
+        if (PHP_OS == 'WINNT') {
+            echo ' > ';
+            $inp = stream_get_line(STDIN, 1024, PHP_EOL);
+        } else {
+            $inp = readline(' > ');
+        }
         readline_add_history($inp);
         return $inp;
     }
