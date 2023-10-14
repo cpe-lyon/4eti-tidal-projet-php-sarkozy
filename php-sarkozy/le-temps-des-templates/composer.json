@@ -19,7 +19,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
+            "PhpSarkozy\\LeTempsDesTemplates\\": "src/",
+            "PhpSarkozy\\LeTempsDesTemplates\\elements\\": "src/elements/"
         }
     },
     "require": {}

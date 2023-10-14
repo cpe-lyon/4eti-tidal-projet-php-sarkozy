@@ -3,7 +3,7 @@
         'name' => 'php-sarkozy/le-temps-des-templates',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'e1772aa86bf583aafacfe9d155848a4efaba4a5e',
+        'reference' => 'f5cb48ff9bab0c930cfdf3478a80e3198822ba87',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'php-sarkozy/le-temps-des-templates' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e1772aa86bf583aafacfe9d155848a4efaba4a5e',
+            'reference' => 'f5cb48ff9bab0c930cfdf3478a80e3198822ba87',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
