@@ -44,5 +44,11 @@ Les priorités les plus grandes sont vérifiées en premier
 ### Le Temps des Templates
 Ce module a pour responsabilité de créer une réponse HTML depuis une vue en utilisant des fichiers de templates
 
+Par défaut, les templates sont stockés dans un dossier "views" à la racine du projet.
+Les différentes syntaxes sont les suivantes:
+* Afficher une variable: {{ var }}
+* Utiliser une condition: {{ .if { condition } }} ... {{ .end }}
+* Il est possible d'ajouter un else avec: {{ .else { condition } }}
+
 ## Répartition du travail
 **TODO @josse.de-oliveira**
