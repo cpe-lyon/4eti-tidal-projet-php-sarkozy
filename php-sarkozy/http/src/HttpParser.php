@@ -17,10 +17,6 @@ class HttpParser{
         $this->template_module = $template_module;
     }
 
-    private function get_json_response(){
-
-    }
-
     private function guess_response_type($controller_response): HttpResponseType{
         if($this->template_module != null && $controller_response instanceof SarkoView){
             return HttpResponseType::TEMPLATE;
@@ -29,7 +25,6 @@ class HttpParser{
             return HttpResponseType::STRING_RAW;
         }
         return HttpResponseType::JSON;
-        
     }
 
     function get_response($controller_response, ?HttpProduces $produces): HttpResponse{
