@@ -130,7 +130,6 @@ final class HttpModule{
     }
 
     function handle_response(HttpRequest $request, $controller_response): Request{
-        //TODO @theo.clere: response detection
         $this->check_request($request);
 
         if($controller_response instanceof \Exception){
