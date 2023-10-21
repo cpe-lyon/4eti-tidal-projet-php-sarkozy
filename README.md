@@ -47,8 +47,8 @@ Ce module a pour responsabilité de créer une réponse HTML depuis une vue en u
 Par défaut, les templates sont stockés dans un dossier "views" à la racine du projet.
 Les différentes syntaxes sont les suivantes:
 * Afficher une variable: `{{ var }}`
-* Utiliser une condition: `{{ .if { condition } }} ... {{ .end }}`
-* Il est possible d'ajouter un else avec: `{{ .else { condition } }}`
+* Utiliser une condition: `{{ if { condition } }} ... {{ end }}`
+* Il est possible d'ajouter un else avec: `{{ else { condition } }}`
 
 ## Répartition du travail
 **TODO @josse.de-oliveira**
