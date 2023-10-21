@@ -27,7 +27,7 @@ In your template file, insert your variables surrounding them with double braces
 
 ## Conditions
 
-You can add conditions in your templates with `if`, `else`, and `end` instructions. Supported conditions are `<`, `<=`, `==`, `>=`, `>`.\
+You can add conditions in your templates with `if`, `else`, and `end` instructions. Supported conditions are `<`, `<=`, `==`, `>=`, `>`.
 
 > :warning: The `===` condition is not supported.\
 
