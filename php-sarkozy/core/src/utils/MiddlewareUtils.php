@@ -2,6 +2,7 @@
 
 namespace PhpSarkozy\core\utils;
 
+use PhpSarkozy\core\api\MiddlewareData;
 use PhpSarkozy\core\attributes\Middleware;
 use PhpSarkozy\core\api\Request;
 use PhpSarkozy\core\attributes\SarkozyModule;
@@ -19,7 +20,7 @@ final class MiddlewareUtils
             $reflection_class = new \ReflectionClass($class);
             if ( $attributes = $reflection_class->getAttributes(Middleware::class, \ReflectionAttribute::IS_INSTANCEOF)){
                 if(count($attributes) == 1){
-                    if($priority = $attributes[0]->getArguments()[0]){
+                    if($priority = current($attributes[0]->getArguments())){
                         $obj = ["priority"=>$priority,"reflection_class"=>$reflection_class, "interfacesNames" => $reflection_class->getInterfaceNames()];
                     }else{
                         $obj = ["priority"=> 1,"reflection_class"=>$reflection_class, "interfacesNames" => $reflection_class->getInterfaceNames()];
@@ -33,15 +34,16 @@ final class MiddlewareUtils
         return $reflection_middleware;
     }
 
-    public static function intercept_request(Request $request, $modules){
+    public static function intercept_request(Request &$request, $modules): ?MiddlewareData{
         if(($middlewares_module = $modules[SarkozyModule::MIDDLEWARE_MODULE]) !== NULL){
-            $middlewares_module->intercept_request($request);
+            return $middlewares_module->intercept_request($request);
         }
     }
 
-    public static function intercept_response(Request $request, $modules){
+    public static function intercept_response(Request $request, $modules, ?MiddlewareData $data){
+        $response = $request->get_response();
         if(($middlewares_module = $modules[SarkozyModule::MIDDLEWARE_MODULE]) !== NULL){
-            $middlewares_module->intercept_response($request->get_response());
+             $middlewares_module->intercept_response($response, $data);
         }
     }
 }

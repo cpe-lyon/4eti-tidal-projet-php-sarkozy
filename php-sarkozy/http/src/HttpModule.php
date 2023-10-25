@@ -90,8 +90,7 @@ final class HttpModule{
         }
         $args = array();
         $body = $request->get_body();
-        $headers = $request->get_headers();
-        $ctype = isset($headers['Content-Type']) ? $headers['Content-Type'] : 'text/plain';
+        $ctype = $request->get_content_type('text/plain');
         switch ($ctype) {
             case 'application/x-www-form-urlencoded':
                 parse_str($body, $args);

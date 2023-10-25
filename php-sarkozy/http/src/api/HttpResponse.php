@@ -42,8 +42,17 @@ class HttpResponse extends Response{
         return $this->metadata["headers"];
     }
 
-    public function get_body(){
+    public function get_body(): string{
         return $this->metadata["body"];
     }
+
+    public function set_body(string $new_body){
+        $this->metadata["body"] = $new_body;
+    }
+
+    public function get_content_type($default=""): string{
+        return isset($this->get_headers()['Content-Type']) ? $this->get_headers()['Content-Type'] : $default;
+    }
+
 }
 ?>
