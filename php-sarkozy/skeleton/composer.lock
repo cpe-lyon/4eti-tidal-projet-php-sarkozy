@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-main",
+            "version": "dev-Test-skeleton",
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "403a1a900be97e16fb8c4614094bb386818b096f"
+                "reference": "8bdbd2923015d7d200d82ae516a81b38e92792df"
             },
             "type": "library",
             "autoload": {
@@ -48,11 +48,11 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-main",
+            "version": "dev-Test-skeleton",
             "dist": {
                 "type": "path",
                 "url": "../http",
-                "reference": "1a20c7f066432eb170f7f70f1eb6cb20088c2e1f"
+                "reference": "3b8122e5128020d993eabfb0e3dc3a2c128c6b88"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -92,11 +92,11 @@
         },
         {
             "name": "php-sarkozy/http-routing",
-            "version": "dev-main",
+            "version": "dev-Test-skeleton",
             "dist": {
                 "type": "path",
                 "url": "../http-routing",
-                "reference": "4167dea885f69f9102d4b317134855bdacd4cedf"
+                "reference": "cf7e6546af63d2c432ba1f81ad07317420892120"
             },
             "require": {
                 "php-sarkozy/core": "@dev",
@@ -134,11 +134,11 @@
         },
         {
             "name": "php-sarkozy/le-temps-des-templates",
-            "version": "dev-main",
+            "version": "dev-Test-skeleton",
             "dist": {
                 "type": "path",
                 "url": "../le-temps-des-templates",
-                "reference": "ca2b06c29c412dd131b24fe714a979e2086dcade"
+                "reference": "3fe54dc9d84df40ae6d7e26fc08171bc4932e91a"
             },
             "type": "library",
             "autoload": {
@@ -172,11 +172,11 @@
         },
         {
             "name": "php-sarkozy/middleware",
-            "version": "dev-main",
+            "version": "dev-Test-skeleton",
             "dist": {
                 "type": "path",
                 "url": "../middleware",
-                "reference": "595cfaa2bd48ed9a92d212ed2f40d96514f3e6be"
+                "reference": "394dbc1c17560925a4a1f37a516e31db1155fdf5"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
