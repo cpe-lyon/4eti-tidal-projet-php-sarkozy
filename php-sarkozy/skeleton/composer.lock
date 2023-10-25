@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "8bdbd2923015d7d200d82ae516a81b38e92792df"
+                "reference": "403a1a900be97e16fb8c4614094bb386818b096f"
             },
             "type": "library",
             "autoload": {
@@ -52,7 +52,7 @@
             "dist": {
                 "type": "path",
                 "url": "../http",
-                "reference": "3b8122e5128020d993eabfb0e3dc3a2c128c6b88"
+                "reference": "1a20c7f066432eb170f7f70f1eb6cb20088c2e1f"
             },
             "require": {
                 "php-sarkozy/core": "@dev"
@@ -96,7 +96,7 @@
             "dist": {
                 "type": "path",
                 "url": "../http-routing",
-                "reference": "cf7e6546af63d2c432ba1f81ad07317420892120"
+                "reference": "4167dea885f69f9102d4b317134855bdacd4cedf"
             },
             "require": {
                 "php-sarkozy/core": "@dev",
@@ -138,7 +138,7 @@
             "dist": {
                 "type": "path",
                 "url": "../le-temps-des-templates",
-                "reference": "3fe54dc9d84df40ae6d7e26fc08171bc4932e91a"
+                "reference": "ca2b06c29c412dd131b24fe714a979e2086dcade"
             },
             "type": "library",
             "autoload": {
@@ -176,7 +176,7 @@
             "dist": {
                 "type": "path",
                 "url": "../middleware",
-                "reference": "394dbc1c17560925a4a1f37a516e31db1155fdf5"
+                "reference": "595cfaa2bd48ed9a92d212ed2f40d96514f3e6be"
             },
             "require": {
                 "php-sarkozy/core": "@dev"

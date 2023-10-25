@@ -22,15 +22,15 @@ class MiddlewareModule {
         $this->init_middlewares_instances();
     }
 
-    public function intercept_request(Request $request){
+    public function intercept_request(Request &$request){
         foreach($this->middleware_instances as $m){
-            $m->intercept_request($request);
+            $request = $m->intercept_request($request);
         }
     }
 
-    public function intercept_response(Response $response){
+    public function intercept_response(Response &$response){
         foreach($this->middleware_instances as $m){
-            $m->intercept_response($response);
+            $response = $m->intercept_response($response);
         }
     }
     
