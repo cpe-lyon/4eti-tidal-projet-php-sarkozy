@@ -40,6 +40,8 @@ class LeTempsDesTemplatesModule implements HttpTemplateModuleInterface
 
         $response = new HttpResponse($compiled_html);
         $response->set_code(200);
+        $response->set_content_type('text/html; charset=UTF-8');
+        $response->set_content_length(strlen($compiled_html));
 
         return $response;
     }

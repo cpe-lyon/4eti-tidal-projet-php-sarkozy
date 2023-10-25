@@ -36,6 +36,10 @@ class HttpRequest extends Request{
     function get_body() : string {
         return $this->get_http_metadata()["body"];
     }
+
+    function get_content_type($default=null): string{
+        return isset($this->get_headers()['Content-Type']) ? $this->get_headers()['Content-Type'] : $default;
+    }
 }
 
 

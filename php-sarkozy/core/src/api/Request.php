@@ -35,6 +35,15 @@ class Request {
     function set_response(Response $response){
         $this->response = $response;
     }
+
+    function get_custom_metadata(){
+        return isset($this->metadata['_custom']) ? $this->metadata['custom'] : null; 
+    }
+
+
+    function set_custom_metadata(string $key, $value){
+        return $this->metadata['_custom'][$key] = $value; 
+    }
 }
 
 ?>

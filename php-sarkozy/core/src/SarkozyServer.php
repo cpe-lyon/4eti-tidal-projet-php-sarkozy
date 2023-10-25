@@ -127,10 +127,12 @@ class SarkozyServer
              */
             $request = $protocol_module->get_request($client);
 
-            // Request interception 
-            utils\MiddlewareUtils::intercept_request($request,$this->modules);
-            
+            $middleware_data = null;
+
             try{
+                // Request interception 
+                $middleware_data = utils\MiddlewareUtils::intercept_request($request,$this->modules);
+            
                 $controller_return = $this->get_return_value($request);
             }catch(\Exception $e){
                 $controller_return = $e;
@@ -143,7 +145,7 @@ class SarkozyServer
             }
 
             // Response interception 
-            utils\MiddlewareUtils::intercept_response($request,$this->modules);
+            utils\MiddlewareUtils::intercept_response($request,$this->modules, $middleware_data);
 
             $raw_response = $protocol_module->get_raw_response($request);
             fwrite($client, $raw_response);

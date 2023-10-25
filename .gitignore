@@ -6,6 +6,7 @@
 /php-sarkozy/le-temps-des-templates/vendor
 /php-sarkozy/middleware/vendor
 /php-sarkozy/skeleton/src/controllers/
+/php-sarkozy/skeleton/src/middlewares/
 /php-sarkozy/skeleton/src/views/
 /.vscode
 /index.html
