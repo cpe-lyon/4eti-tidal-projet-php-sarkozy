@@ -51,4 +51,9 @@ Les différentes syntaxes sont les suivantes:
 * Il est possible d'ajouter un else avec: `{{ else { condition } }}`
 
 ## Répartition du travail
-**TODO @josse.de-oliveira**
+
+- Josse : 40% (core, ump, routing)
+- Ruben : 20% (templating)
+- Théo : 40% (core, http, middleware)
+
+
