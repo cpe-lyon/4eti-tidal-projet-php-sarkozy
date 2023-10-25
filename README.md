@@ -20,6 +20,7 @@ Le coeur a pour responsabilité de:
 * Référencer et charger les contrôleurs
 * Référencer et charger les modules
 * Écouter le port du serveur et recevoir/envoyer les requêtes
+
 ### HttpModule
 HttpModule a des responsabilités qui se dissocient du coeur dans la mesure où on pourrait le remplacer pas un autre mode de transmission que les requêtes HTTP. Cependant, son rôle est essentiel et le serveur ne peut pas fonctionner sans ce module (ou un module alternatif si on en développe un à l'avenir pour les Websockets par exemple).
 Il a pour responsabilités de:
@@ -28,6 +29,7 @@ Il a pour responsabilités de:
 * Convertir les réponses de contrôleurs en objets Response
 * Convertir les objets Response en réponses HTTP en dur
 * Utiliser d'autres modules pour ces tâches
+
 ### HttpRoutingModule
 Ce module a pour responsabilité de faire connaitre au coeur applicatif quelle méthode de controller appeler en fonction du chemin et de la méthode
 Il est utilisé par le HttpModule pour convertir les Request en appels aux contrôleurs
@@ -49,6 +51,11 @@ Les différentes syntaxes sont les suivantes:
 * Afficher une variable: `{{ var }}`
 * Utiliser une condition: `{{ if { condition } }} ... {{ end }}`
 * Il est possible d'ajouter un else avec: `{{ else { condition } }}`
+
+### MiddleWare
+Ce module implémente une mécanisme d'interception de requêtes et de réponses, cela pourrait par example permettre de créer un système d'authentification en récupérant un access_token.
+
+Pour toute utilisation, référez vous au readme du module middleware.
 
 ## Répartition du travail
 
