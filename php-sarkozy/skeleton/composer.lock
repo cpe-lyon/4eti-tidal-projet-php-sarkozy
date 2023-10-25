@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "php-sarkozy/core",
-            "version": "dev-middleware-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../core",
@@ -48,7 +48,7 @@
         },
         {
             "name": "php-sarkozy/http",
-            "version": "dev-middleware-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../http",
@@ -92,7 +92,7 @@
         },
         {
             "name": "php-sarkozy/http-routing",
-            "version": "dev-middleware-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../http-routing",
@@ -134,16 +134,17 @@
         },
         {
             "name": "php-sarkozy/le-temps-des-templates",
-            "version": "dev-middleware-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../le-temps-des-templates",
-                "reference": "ca2b06c29c412dd131b24fe714a979e2086dcade"
+                "reference": "3fe54dc9d84df40ae6d7e26fc08171bc4932e91a"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PhpSarkozy\\LeTempsDesTemplates\\": "src/"
+                    "PhpSarkozy\\LeTempsDesTemplates\\": "src/",
+                    "PhpSarkozy\\LeTempsDesTemplates\\elements\\": "src/elements/"
                 }
             },
             "license": [
@@ -171,7 +172,7 @@
         },
         {
             "name": "php-sarkozy/middleware",
-            "version": "dev-middleware-module",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../middleware",

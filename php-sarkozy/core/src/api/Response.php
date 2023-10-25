@@ -14,6 +14,10 @@ class Response {
         $this->metadata = $metadata;
     }
 
+    public function get_metadata(){
+        return $this->metadata;
+    }
+
 }
 
 ?>
