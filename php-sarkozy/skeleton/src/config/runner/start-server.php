@@ -2,8 +2,9 @@
 
 require_once 'vendor/autoload.php';
 
-use PhpSarkozy\core\SarkozyServer;
-use PhpSarkozy\core\SarkozyLoader;
+new SarkozyLoader(__DIR__."/../../controllers");
+new SarkozyLoader(__DIR__."/../../middlewares");
+new SarkozyLoader(__DIR__."/../modules");
 
 new SarkozyLoader(__DIR__."/../../controllers");
 new SarkozyLoader(__DIR__."/../modules");
